@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text, 
   TouchableOpacity, 
-  TouchableHighlight,
   View,
   ScrollView,
   Image,
@@ -13,6 +12,11 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ListManga from './ListManga';
 import BookMarksManga from './BookMarksManga';
 import SearchManga from './SearchManga';
+import HotManga from './HotManga';
+import CategoryManga from './CategoryManga';
+import SavedManga from './SavedManga';
+import Reminder from './Reminder';
+import WebViewPage from './WebViewPage';
 
 export default class MainView extends Component {
   constructor(props) {
@@ -28,9 +32,59 @@ export default class MainView extends Component {
         hideNav: true,
       }, {
         key: 1,
-        title: 'TRUYỆN YÊU THÍCH',
+        title: 'YÊU THÍCH',
         component: BookMarksManga,
         icon: 'book-multiple',
+        size: 100,
+        color: '#ff856c',
+        hideNav: true,
+      }, {
+        key: 2,
+        title: 'TRUYỆN HOT',
+        component: HotManga,
+        icon: 'fire',
+        size: 100,
+        color: '#ff856c',
+        hideNav: true,
+      }, {
+        key: 3,
+        title: 'TRUYỆN MỚI',
+        component: HotManga,
+        icon: 'newspaper',
+        size: 100,
+        color: '#ff856c',
+        hideNav: true,
+        data: {type: '/truyen-moi-dang'}
+      }, {
+        key: 4,
+        title: 'THỂ LOẠI',
+        component: CategoryManga,
+        icon: 'format-list-bulleted',
+        size: 100,
+        color: '#ff856c',
+        hideNav: true,
+        data: {type: '/truyen-moi-dang'}
+      }, {
+        key: 5,
+        title: 'ĐÃ LƯU',
+        component: SavedManga,
+        icon: 'folder',
+        size: 100,
+        color: '#ff856c',
+        hideNav: true,
+      }, {
+        key: 6,
+        title: 'GHI NHỚ',
+        component: Reminder,
+        icon: 'message-bulleted',
+        size: 100,
+        color: '#ff856c',
+        hideNav: true,
+      }, {
+        key: 7,
+        title: 'TRÌNH DUYỆT WEB',
+        component: WebViewPage,
+        icon: 'web',
         size: 100,
         color: '#ff856c',
         hideNav: true,
@@ -48,6 +102,7 @@ export default class MainView extends Component {
       index: index + 1,
       display: !menus[index].hideNav,
       component: menus[index].component,
+      data: (menus[index].data) ? menus[index].data : {}
     })
   }
 
@@ -57,13 +112,13 @@ export default class MainView extends Component {
     navigator.push({
       title: `TÌM KIẾM ${search}`,
       index: index + 1,
-      display: true,
+      display: false,
       component: SearchManga,
       data: search
     })
   }
 
-  handleSearchChange = (event) => {
+  _handleSearchChange = (event) => {
     let search = event.nativeEvent.text;
     this.setState({
         search
@@ -86,7 +141,7 @@ export default class MainView extends Component {
     return(
       <ScrollView style={styles.mainView} title={title}>
         <View style={styles.faceContainer}>
-          <TextInput placeholder='TÌM KIẾM' onChange={this.handleSearchChange} style={styles.inputText}/>
+          <TextInput placeholder='TÌM KIẾM' onSubmitEditing={() => this._searchManga()} onChange={this._handleSearchChange} style={styles.inputText}/>
           <TouchableOpacity style={styles.btnStyle} onPress={() => this._searchManga() }>
             <Icon name='magnify' color='#60B644' size={32}/>
           </TouchableOpacity>
@@ -104,26 +159,30 @@ const styles = StyleSheet.create({
     marginTop: 65
   },
   touchBox: {
-    width: Util.size.width/3.01333,
-    height: Util.size.width/3.01333,
+    width: (Util.size.width > 700) ? (Util.size.width - 10 - 4 * 15) / 4 : (Util.size.width - 10 - 3 * 10) / 3.01333,
+    height: (Util.size.width > 700) ? (Util.size.width - 10 - 4 * 15) / 4 : (Util.size.width - 10 - 3*10) / 3.01333,
     backgroundColor: '#f3f3f3',
+    marginTop: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    marginBottom: 5
   },
   touchBox1: {
     borderBottomWidth: Util.pixel,
-    borderBottomColor: '#ccc',
+    borderBottomColor: '#777',
     borderRightWidth: Util.pixel,
-    borderRightColor: '#ccc',
+    borderRightColor: '#777',
   },
   boxContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: Util.size.width/3.01333,
-    height: Util.size.width/3.01333,
+    width: (Util.size.width > 700) ? (Util.size.width - 10 - 4 * 15) / 4 : (Util.size.width - 10 - 3*10) / 3.01333,
+    height: (Util.size.width > 700) ? (Util.size.width - 10 - 4 * 15) / 4 : (Util.size.width - 10 - 3*10) / 3.01333,
   },
   boxText: {
     position: 'absolute',
     bottom: 15,
-    width: Util.size.width/3,
+    width: (Util.size.width > 700) ? (Util.size.width - 10 - 4 * 15) / 4 : (Util.size.width - 10 - 3*10) / 3.01333,
     textAlign: 'center',
     left: 0,
     backgroundColor: 'transparent'
@@ -140,6 +199,10 @@ const styles = StyleSheet.create({
     borderLeftColor: '#ccc',
     borderRightWidth: Util.pixel,
     borderRightColor: '#ccc',
+    paddingTop: 5,
+    paddingLeft: 5,
+    paddingRight: 5,
+    paddingBottom: 5
   },
   btnStyle: {
     width: 40,

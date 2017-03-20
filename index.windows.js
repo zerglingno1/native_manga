@@ -61,7 +61,7 @@ class native_manga extends Component {
     return (
       <Navigator
         initialRoute={{ 
-          title: 'Orange MainPage',
+          title: 'TRUYỆN TRANH',
           index: 0,
           display: true,
           component: MainView,

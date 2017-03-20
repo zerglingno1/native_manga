@@ -48,6 +48,13 @@ export default class WebViewPage extends Component {
       <View style={[styles.container]}>
         <View style={[styles.addressBarRow]}>
           <TouchableOpacity
+            onPress={this.goOut}
+            style={this.state.backButtonEnabled ? styles.navButton : styles.disabledButton}>
+            <Text>
+               <Icon size={20} name='ios-close-outline'></Icon>
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={this.goBack}
             style={this.state.backButtonEnabled ? styles.navButton : styles.disabledButton}>
             <Text>
@@ -116,7 +123,7 @@ export default class WebViewPage extends Component {
   };
 
   _renderHeader = (props) => {
-    return <TabBar style={[{ backgroundColor: '#3b5998' } ]} tabWidth = {30} {...props} />;
+    return <TabBar style={[{ backgroundColor: '#3b5998', height: 50 } ]} tabWidth = {30} {...props} />;
   };
 
    _renderScene = ({ route, index }) => {
@@ -150,6 +157,11 @@ export default class WebViewPage extends Component {
   goBack = () => {
     const { index } = this.state;
     this.webview[index].goBack();
+  };
+
+  goOut = () => {
+    const { navigator, index } = this.props;
+    if (index > 0) {navigator.pop()}
   };
 
   goForward = () => {

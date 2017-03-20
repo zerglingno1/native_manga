@@ -14,23 +14,78 @@ import PageHeader from '../components/Common/PageHeader';
 import Util from '../utils/utils';
 import CheerioUtil from '../utils/CheerioUtil';
 import StorageUtil from '../utils/StorageUtil';
-import DetailManga from '../pages/DetailManga';
+import HotManga from '../pages/HotManga';
 import axios from 'axios';
 
-export default class BookMarksManga extends Component{
+export default class CategoryManga extends Component{
   constructor() {
     super();
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource,
       type: 'tatca',
-      list: [],
+      list: [{
+        title: 'Action',
+        url: '/theloai/action'
+      }, {
+        title: 'Adventure',
+        url: '/theloai/adventure'
+      }, {
+        title: 'Comedy',
+        url: '/theloai/comedy'
+      }, {
+        title: 'Fantasy',
+        url: '/theloai/fantasy'
+      }, {
+        title: 'Horror',
+        url: '/theloai/horror'
+      }, {
+        title: 'Mature',
+        url: '/theloai/mature'
+      }, {
+        title: 'Romance',
+        url: '/theloai/romance'
+      }, {
+        title: 'School life',
+        url: '/theloai/school-life'
+      }, {
+        title: 'Sci-fi',
+        url: '/theloai/sci-fi'
+      }, {
+        title: 'Sports',
+        url: '/theloai/sports'
+      }, {
+        title: 'Detective',
+        url: '/theloai/trinh-tham'
+      }, {
+        title: 'Adult',
+        url: '/theloai/adult'
+      }, {
+        title: '16+',
+        url: '/theloai/16'
+      }, {
+        title: '18+',
+        url: '/theloai/18'
+      }, {
+        title: 'Ecchi',
+        url: '/theloai/ecchi-new'
+      }, {
+        title: 'Game',
+        url: '/theloai/game'
+      }, {
+        title: 'Anime',
+        url: '/theloai/anime'
+      }, {
+        title: 'Manga',
+        url: '/theloai/manga'
+      }, {
+        title: 'Historical',
+        url: '/theloai/historical'
+      }],
     };
   }
 
   componentWillMount() {
-    this._startLoad();
-
     BackAndroid.addEventListener('hardwareBackPress', () => {
       const { navigator, index } = this.props;
       if (index > 0) {navigator.pop()};
@@ -43,23 +98,14 @@ export default class BookMarksManga extends Component{
   componentDidMount() {
   }
 
-  async _startLoad() {
-    const { type, list } = this.state;
-    let mangas = await StorageUtil.getBookMark();
-    this.setState({
-      list: mangas
-    });
-  }
-
-  _openManga(row, manga) {
+  _openManga(row, type) {
     const { navigator, index } = this.props;
-
     navigator.push({
-      title: manga.title,
+      title: type.title,
       index: index + 1,
       display: false,
-      component: DetailManga,
-      data: manga
+      component: HotManga,
+      data: {type: type.url}
     });
   }
 
@@ -75,14 +121,12 @@ export default class BookMarksManga extends Component{
           renderHeader = {() => <View style={{height: 10, backgroundColor: '#f5f5f5'}} />}
           enableEmptySections = {true} 
           dataSource={source}
+          contentContainerStyle={{flexDirection: 'row', flexWrap: 'wrap'}}
           renderRow={(rowData) => 
             <TouchableOpacity underlayColor={'#bbb'} onPress={() => {
                 this._openManga(this.rowID, rowData);
               }}>
               <View style={styles.recordItem}>
-                <View style={{alignItems: 'center'}}>
-                    <Image resizeMode='stretch' source={(rowData.image) ? {uri: rowData.image} : require('../assets/images/w2.png')} style={styles.recordItemImage}/>
-                </View>
                 <Text style={styles.recordItemTitle}>{rowData.title}</Text>
               </View>
             </TouchableOpacity>
@@ -101,27 +145,21 @@ const styles = StyleSheet.create({
   },
   recordList: {
     width: Util.size.width,
-    height: Util.size.height - 100,
+    height: Util.size.height - 40,
+    paddingTop: 5, paddingLeft: 10, paddingRight: 10, paddingBottom: 5,
   },
   recordItem: {
-    height: 80,
-    borderBottomWidth: Util.pixel,borderBottomColor: '#bbb',
-    paddingTop: 5, paddingLeft: 10, paddingRight: 10, paddingBottom: 5,
-    flexDirection: 'row',
-    alignItems: 'center'
+    height: 130,
+    width: 130,
+    backgroundColor: '#f3f3f3',
+    marginTop: 15, marginLeft: 15, marginRight: 15, marginBottom: 15,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   recordItemTitle:{
     backgroundColor: 'transparent',
-    flex: 1,
-    textAlign: 'right',
-    paddingRight: 20,
-    color: '#777'
-  },
-  recordItemImage:{
-    backgroundColor: 'transparent',
-    paddingLeft: 20,
-    width: 80,
-    flex: 1,
+    textAlign: 'center',
+    color: '#60B644'
   },
 });
 

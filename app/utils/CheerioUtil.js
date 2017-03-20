@@ -74,9 +74,11 @@ export default {
       normalizeWhitespace: true
     });
 
+    let count = 1;
     $('div.content img').each( function(index, element) { 
       let page = $(element).attr('src');
-      listPages.push(page);
+      listPages.push({page: count, image: page});
+      count++;
     });
     $('select.form-control').first().find('option').each( function(index, element) { 
       let chap = {};
@@ -95,7 +97,6 @@ export default {
     });
     $('div.list a').each( function(index, element) {
       let manga = {};
-      manga.image = '';
       manga.title = $(element).text();
       manga.url = $(element).attr('href');
       manga.id =  manga.url.match(/\/(.*)\//).pop();

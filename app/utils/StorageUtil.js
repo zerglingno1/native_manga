@@ -4,6 +4,7 @@ export default {
   table: {
     bookmark: '@BOOKMARK',
     manga: '@MANGA',
+    mangaList: '@MANGALIST',
     readHistory: '@HISTORY',
   },
   object: {
@@ -53,5 +54,49 @@ export default {
       return false;
     }
     return JSON.parse(historyData);
+  },
+  saveManga: async (html, chap, manga) => {
+    const table = '@MANGA';
+    const tableList = '@MANGALIST';
+    let mangaData = await AsyncStorage.getItem(table + manga.id);
+    let list = await AsyncStorage.getItem(tableList);
+    if (!mangaData) {
+      manga.chaps= {};
+      manga.chaps[chap.url] = {url: chap.url, title: chap.title, pages: html};
+      await AsyncStorage.setItem(table + manga.id, JSON.stringify(manga));
+      if (list) {
+        list = JSON.parse(list);
+      } else {
+        list = [];
+      }
+      list.push(table + manga.id);
+      await AsyncStorage.setItem(tableList, JSON.stringify(list));
+    } else {
+      mangaData = JSON.parse(mangaData);
+      mangaData.chaps[chap.url] = {url: chap.url, title: chap.title, pages: html};
+      await AsyncStorage.setItem(table + manga.id, JSON.stringify(mangaData));
+    }
+  },
+  getSavedMangaList: async () => {
+    const table = '@MANGALIST';
+    let historyData = await AsyncStorage.getItem(table);
+    if (!historyData) {
+      return false;
+    }
+    return JSON.parse(historyData);
+  },
+  getSavedMultiManga: async (mangas, callback) => {
+    const table = '@MANGALIST';
+    if(mangas) {
+      AsyncStorage.multiGet(mangas, (err, stores) => {
+        let result = [];
+        if (!err) {
+          stores.map((store) => {
+            result.push(JSON.parse(store[1]));
+          });
+          callback(result);
+        }
+      });
+    }
   },
 }

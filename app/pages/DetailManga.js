@@ -8,13 +8,14 @@ import {
   ScrollView, 
   ListView,
   Image, 
-  TouchableHighlight, 
-  BackAndroid, TouchableOpacity } from 'react-native';
+  BackAndroid, 
+  TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Util from '../utils/utils';
 import StorageUtil from '../utils/StorageUtil';
 import CheerioUtil from '../utils/CheerioUtil';
 import ReadManga from '../pages/ReadManga';
+import PageHeader from '../components/Common/PageHeader';
 import axios from 'axios';
 
 export default class DetailManga extends Component{
@@ -85,13 +86,12 @@ export default class DetailManga extends Component{
   _openChap(row, manga) {
     const { navigator, index, data } = this.props;
     //set manga id
-    manga.id = data.id;
     navigator.push({
       title: 'ĐỌC TRUYỆN',
       index: index + 1,
       display: false,
       component: ReadManga,
-      data: manga
+      data: { chap: manga, manga: data }
     });
   }
 
@@ -122,14 +122,16 @@ export default class DetailManga extends Component{
 
   render() {
       const { chaps, dataSource, introduce, host } = this.state;
-      const { data } = this.props;
+      const { data, navigator, index } = this.props;
       let source = dataSource.cloneWithRows(chaps);
     return(
       <View style={styles.container}>
+        <PageHeader navigator={navigator} index={index} />
         <ScrollView>
+        <Text style={[styles.faceIntroduce, {fontWeight: 'bold'}]}>{data.title}</Text>
         <View style={styles.faceContainer}>
-          <Image resizeMode='stretch' source={{uri: data.image}} style={styles.faceImage}/>
-          <Text style={styles.faceIntroduce}>{introduce}</Text>
+          {data.image && (<Image resizeMode='stretch' source={{uri: data.image}} style={styles.faceImage}/>)}
+          {introduce != '' && (<Text style={styles.faceIntroduce}>{introduce}</Text>)}
         </View>
         </ScrollView>
         <View style={styles.buttonContainer}>
@@ -139,12 +141,12 @@ export default class DetailManga extends Component{
           <TouchableOpacity style={styles.btnTextStyle} onPress={() => this._controlPress('continue') }>
             <Text style={[styles.btnText, {color: '#ffffff'}]}>{'ĐỌC TIẾP'}</Text>
           </TouchableOpacity>
-          <TouchableHighlight style={styles.btnStyle} onPress={() => this._controlPress('bookmark') }>
+          <TouchableOpacity style={styles.btnStyle} onPress={() => this._controlPress('bookmark') }>
             <Icon name='md-bookmark' color='#60B644' size={32}/>
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.btnStyle} onPress={() => this._controlPress('bookmarks') }>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.btnStyle} onPress={() => this._controlPress('bookmarks') }>
             <Icon name='md-bookmarks' color='#60B644' size={32}/>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
         <ScrollView style={styles.recordList}>
           <ListView
@@ -152,7 +154,7 @@ export default class DetailManga extends Component{
           enableEmptySections = {true} 
           dataSource={source}
           renderRow={(rowData) => 
-          <TouchableHighlight underlayColor={'#bbb'} onPress={() => {
+          <TouchableOpacity underlayColor={'#bbb'} onPress={() => {
               this._openChap(this.rowID, rowData);
             }}>
             <View style={styles.recordItem}>
@@ -161,7 +163,7 @@ export default class DetailManga extends Component{
                 <Text style={styles.recordItemTime}>{rowData.date}</Text>
               </View>
             </View>
-          </TouchableHighlight>
+          </TouchableOpacity>
           }/>
         </ScrollView>
       </View>
@@ -212,7 +214,7 @@ const styles = StyleSheet.create({
   },
   recordList: {
     width: Util.size.width,
-    height: Util.size.height - 250 - 65,
+    height: Util.size.height - 250 - 60,
     backgroundColor: '#bbb',
   },
   recordItem: {
@@ -246,7 +248,8 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingRight: 5,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flex: 1
   },
   btnTextStyle: {
     marginRight: 5,
@@ -257,7 +260,8 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingRight: 5,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flex: 1
   },
 });
 

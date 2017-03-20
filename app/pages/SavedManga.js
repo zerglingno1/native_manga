@@ -14,10 +14,10 @@ import PageHeader from '../components/Common/PageHeader';
 import Util from '../utils/utils';
 import CheerioUtil from '../utils/CheerioUtil';
 import StorageUtil from '../utils/StorageUtil';
-import DetailManga from '../pages/DetailManga';
+import ReadSavedManga from '../pages/ReadSavedManga';
 import axios from 'axios';
 
-export default class BookMarksManga extends Component{
+export default class SavedManga extends Component{
   constructor() {
     super();
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -45,9 +45,11 @@ export default class BookMarksManga extends Component{
 
   async _startLoad() {
     const { type, list } = this.state;
-    let mangas = await StorageUtil.getBookMark();
-    this.setState({
-      list: mangas
+    let mangas = await StorageUtil.getSavedMangaList();
+    StorageUtil.getSavedMultiManga(mangas, (list) => {
+      this.setState({
+        list
+      });
     });
   }
 
@@ -58,7 +60,7 @@ export default class BookMarksManga extends Component{
       title: manga.title,
       index: index + 1,
       display: false,
-      component: DetailManga,
+      component: ReadSavedManga,
       data: manga
     });
   }
@@ -83,7 +85,7 @@ export default class BookMarksManga extends Component{
                 <View style={{alignItems: 'center'}}>
                     <Image resizeMode='stretch' source={(rowData.image) ? {uri: rowData.image} : require('../assets/images/w2.png')} style={styles.recordItemImage}/>
                 </View>
-                <Text style={styles.recordItemTitle}>{rowData.title}</Text>
+                <Text style={styles.recordItemTitle}>{rowData.title} {' ( ' +Object.keys(rowData.chaps).length + ' CHAP ĐÃ LƯU )'} </Text>
               </View>
             </TouchableOpacity>
           }/>)}

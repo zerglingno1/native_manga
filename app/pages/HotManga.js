@@ -19,14 +19,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
 
-export default class ListManga extends Component{
+export default class HotManga extends Component{
   constructor() {
     super();
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource,
-      type: '/danhsach/tatca',
-      types: [],
+      type: '/truyenhot',
       total: 0,
       list: [],
       url: 'http://m.blogtruyen.com',
@@ -34,17 +33,25 @@ export default class ListManga extends Component{
       paging: [],
     };
     
-    this._startLoad(false);
   }
 
   componentWillMount() {
+    const { data } = this.props;
+
     BackAndroid.addEventListener('hardwareBackPress', () => {
       const { navigator, index } = this.props;
       if (index > 0) {navigator.pop()};
       BackAndroid.removeEventListener('hardwareBackPress');
       return true;
     });
-    
+
+    let type = (data && data.type) ? data.type : false;
+    if (type) {
+      this.setState({
+        type
+      });
+    }
+    this._startLoad(false, type);
   }
 
   componentDidMount() {
@@ -64,7 +71,6 @@ export default class ListManga extends Component{
 
         this.setState({
           list: mangas.listManga,
-          types: mangas.listTypes,
           total: mangas.total,
           paging: this.makePaging(mangas.total)
         });
@@ -128,54 +134,16 @@ export default class ListManga extends Component{
     return pages;
   }
 
-  _controlPressType = (item) => {
-    const { page } = this.state;
-    this.setState({
-      type: item.url,
-      page: '1'
-    });
-    this._startLoad('1', item.url);
-    this.refs.listManga.scrollTo({x: 0,y: 0,animated: false});
-  };
 
   render() {
-    const { type, list, test, dataSource, types, page, total, paging } = this.state;
+    const { type, list, test, dataSource, page, total, paging } = this.state;
     const { navigator, index } = this.props;
 
     let source = dataSource.cloneWithRows(list);
-    let temp = types.slice(0);
-    let first = temp.splice(0, temp.length / 2);
-    let second = temp;
     
     return(
       <ScrollView  style={styles.container}>
       <PageHeader navigator={navigator} index={index} />
-      <View style={styles.typeContainer}>
-        {first && first.map((item) => {
-          let style = [styles.btnText];
-          if (item.url == type) {
-            return (<TouchableOpacity style={styles.btnStyle}>
-              <Text style={[styles.btnText, {color: '#bbb'}]}>{item.title}</Text>
-            </TouchableOpacity>);
-          }
-          return (<TouchableOpacity style={styles.btnStyle} onPress={() => this._controlPressType(item) }>
-              <Text style={styles.btnText}>{item.title}</Text>
-            </TouchableOpacity>);
-        })}
-      </View>
-      <View style={styles.typeContainer}>
-        {second && second.map((item) => {
-          let style = [styles.btnText];
-          if (item.url == type) {
-            return (<TouchableOpacity style={styles.btnStyle}>
-              <Text style={[styles.btnText, {color: '#bbb'}]}>{item.title}</Text>
-            </TouchableOpacity>);
-          }
-          return (<TouchableOpacity style={styles.btnStyle} onPress={() => this._controlPressType(item) }>
-              <Text style={styles.btnText}>{item.title}</Text>
-            </TouchableOpacity>);
-        })}
-      </View>
       <ListView
         style={styles.recordList}
         ref='listManga'
@@ -225,7 +193,7 @@ const styles = StyleSheet.create({
   },
   recordList: {
     width: Util.size.width,
-    height: Util.size.height - 40 - 50 - 80,
+    height: Util.size.height - 40 - 50,
   },
   recordItem: {
     height: 80,
@@ -278,17 +246,5 @@ const styles = StyleSheet.create({
     height: 40
   },
 
-  typeContainer: {
-    width: Util.size.width,
-    paddingLeft: 10, paddingRight:10,
-    backgroundColor: '#fff',
-    height: 40,
-    flexDirection: 'row'
-  },
-  btnText: {
-    fontSize: 14,
-    backgroundColor: 'transparent',
-    color: '#60B644',
-  },
 });
 

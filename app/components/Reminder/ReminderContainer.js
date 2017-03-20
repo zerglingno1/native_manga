@@ -49,7 +49,7 @@ export default class ReminderContainer extends Component{
       if(!stores) {
         this.setState({
           listData: {
-            title: 'Reminder',
+            title: 'GHI NHỚ',
             theme: '#fe952b',
             list: []
           },
@@ -158,7 +158,7 @@ export default class ReminderContainer extends Component{
           <TextInput 
           autoCapitalize='none' 
           ref='addList'
-          placeholder='type your todo'
+          placeholder='nhập vào ghi NHỚ'
           onEndEditing={(event) => this._addList(event.nativeEvent.text)} 
           onChangeText={(text) => this._wordChange(text) }
           onSubmitEditing={(event) => this._addList(event.nativeEvent.text)}
@@ -190,7 +190,7 @@ export default class ReminderContainer extends Component{
 
 const styles = StyleSheet.create({
   reminderContainer: {
-    height: Util.size.height-65,
+    height: Util.size.height - 40,
     width: Util.size.width,
     borderRadius: 10,
     position: 'absolute',
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
       height: -1,
       width: 0,
     },
-    marginTop: 60,
+    marginTop: 20,
   },
   reminderBg: {
     height: Util.size.height-65,
