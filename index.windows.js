@@ -15,6 +15,7 @@ import {
   TouchableOpacity, } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MainView from './app/pages/MainView';
+import PosMainView from './app/pages/PosMainView';
 
 class NavigationBar extends Navigator.NavigationBar {
   render() {
@@ -63,8 +64,8 @@ class native_manga extends Component {
         initialRoute={{ 
           title: 'TRUYỆN TRANH',
           index: 0,
-          display: true,
-          component: MainView,
+          display: false,
+          component: PosMainView,
         }}
         configureScene={this.configureScene}
         renderScene={(route, navigator) => {

@@ -158,7 +158,7 @@ export default class ReminderContainer extends Component{
           <TextInput 
           autoCapitalize='none' 
           ref='addList'
-          placeholder='nhập vào ghi NHỚ'
+          placeholder='nhập vào ghi nhớ'
           onEndEditing={(event) => this._addList(event.nativeEvent.text)} 
           onChangeText={(text) => this._wordChange(text) }
           onSubmitEditing={(event) => this._addList(event.nativeEvent.text)}

@@ -123,7 +123,7 @@ export default class WebViewPage extends Component {
   };
 
   _renderHeader = (props) => {
-    return <TabBar style={[{ backgroundColor: '#3b5998', height: 50 } ]} tabWidth = {30} {...props} />;
+    return <TabBar style={[{ backgroundColor: '#3b5998', height: 50, flexWrap: 'wrap' } ]} tabWidth = {30} {...props} />;
   };
 
    _renderScene = ({ route, index }) => {

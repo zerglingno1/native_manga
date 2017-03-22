@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="6f310977-73c8-47ac-a79e-b0b3b4f08269"
+    Name="2ad7b96b-58e8-45c4-b82b-c56b2d619610"
     Publisher="CN=publisher"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="6f310977-73c8-47ac-a79e-b0b3b4f08269" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="2ad7b96b-58e8-45c4-b82b-c56b2d619610" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>native_manga</DisplayName>
