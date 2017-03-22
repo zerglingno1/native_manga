@@ -1,53 +1,102 @@
 /**
- * Sample React Native App
+ * Todo native
  * https://github.com/facebook/react-native
  * @flow
  */
 
 import React, { Component } from 'react';
-import {
+import { 
   AppRegistry,
+  DeviceEventEmitter,
+  Image,
+  Navigator,
   StyleSheet,
-  Text,
-  View
-} from 'react-native';
+  Text, 
+  TouchableOpacity, } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import MainView from './app/pages/TestPage/MainView';
+import PosMainView from './app/pages/PosMainView';
 
-export default class todo_native extends Component {
+class NavigationBar extends Navigator.NavigationBar {
   render() {
+    let { navState } = this.props;
+    let routes = navState.routeStack;
+
+    if (routes.length) {
+      let route = routes[routes.length - 1];
+
+      if (route.display === false) {
+        return null;
+      }
+    }
+
+    return super.render();
+  }
+}
+
+class native_manga extends Component {
+  configureScene(route, routeStack) {
+    return Navigator.SceneConfigs.FadeAndroid;
+  }
+
+  routeMapper = {
+    LeftButton: (route, navigator, index, navState) =>
+      {
+        if(route.index > 0) {
+          return <TouchableOpacity
+            underlayColor='transparent'
+            onPress={() => {if (index > 0) {navigator.pop()}}}>
+            <Text style={styles.navBackBtn}><Icon size={18} name='ios-arrow-back'></Icon> BACK</Text>
+          </TouchableOpacity>;
+        } else {
+          return null;
+        }
+      },
+    RightButton: (route, navigator, index, navState) =>
+      { return null; },
+    Title: (route, navigator, index, navState) =>
+      { return (<Text style={styles.navTitle}>{route.title}</Text>); },
+  };
+  
+  render(){
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      <Navigator
+        initialRoute={{ 
+          title: 'EC ORANGE',
+          index: 0,
+          display: false,
+          component: PosMainView,
+        }}
+        configureScene={this.configureScene}
+        renderScene={(route, navigator) => {
+          return <route.component navigator={navigator} title={route.title} index={route.index} data={route.data} />
+        }}
+        navigationBar={
+          <NavigationBar
+            routeMapper={this.routeMapper}
+            style={styles.navBar} />
+        } />
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+  navBar: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd'
+
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  navTitle: {
+    paddingTop: 10,
+    fontSize: 18,
+    fontWeight: '500',
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  navBackBtn: {
+    paddingTop: 10,
+    paddingLeft: 10,
+    fontSize: 18,
+    color: '#555',
   },
 });
 
-AppRegistry.registerComponent('todo_native', () => todo_native);
+AppRegistry.registerComponent('native_manga', () => native_manga);

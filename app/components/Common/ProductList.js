@@ -47,7 +47,7 @@ export default class ProductList extends Component{
               <View style={styles.recordItem}>
                 <Text style={[styles.recordItemTitle, {fontWeight: '500'}]}>{rowData.name}</Text>
                 {rowData.type == 0 && (
-                  <Text style={styles.recordItemTitle}>{`Price : ${rowData.price} $`}</Text>)}
+                  <Text style={styles.recordItemTitle}>{`Price : ${rowData.price} yen`}</Text>)}
               </View>
             </TouchableOpacity>
           }/>)}

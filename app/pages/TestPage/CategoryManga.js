@@ -10,11 +10,11 @@ import {
   Image, 
   TouchableOpacity, 
   BackAndroid } from 'react-native';
-import PageHeader from '../components/Common/PageHeader';
-import Util from '../utils/utils';
-import CheerioUtil from '../utils/CheerioUtil';
-import StorageUtil from '../utils/StorageUtil';
-import HotManga from '../pages/HotManga';
+import PageHeader from '../../components/Common/PageHeader';
+import Util from '../../utils/utils';
+import CheerioUtil from '../../utils/CheerioUtil';
+import StorageUtil from '../../utils/StorageUtil';
+import HotManga from './HotManga';
 import axios from 'axios';
 
 export default class CategoryManga extends Component{

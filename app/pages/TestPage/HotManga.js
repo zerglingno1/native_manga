@@ -11,10 +11,10 @@ import {
   TouchableOpacity, 
   BackAndroid, 
   Picker } from 'react-native';
-import Util from '../utils/utils';
-import CheerioUtil from '../utils/CheerioUtil';
-import DetailManga from '../pages/DetailManga';
-import PageHeader from '../components/Common/PageHeader';
+import Util from '../../utils/utils';
+import CheerioUtil from '../../utils/CheerioUtil';
+import DetailManga from './DetailManga';
+import PageHeader from '../../components/Common/PageHeader';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';

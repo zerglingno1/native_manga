@@ -12,9 +12,10 @@ import {
   Navigator,
   StyleSheet,
   Text, 
-  TouchableOpacity } from 'react-native';
+  TouchableOpacity, } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import MainView from './app/pages/MainView';
+import MainView from './app/pages/TestPage/MainView';
+import PosMainView from './app/pages/PosMainView';
 
 class NavigationBar extends Navigator.NavigationBar {
   render() {
@@ -33,18 +34,14 @@ class NavigationBar extends Navigator.NavigationBar {
   }
 }
 
-class todo_native extends Component {
-
+class native_manga extends Component {
   configureScene(route, routeStack) {
-    if (route.type == 'Bottom') {
-      return Navigator.SceneConfigs.FloatFromBottom; 
-    }
-    return Navigator.SceneConfigs.PushFromRight;
+    return Navigator.SceneConfigs.FadeAndroid;
   }
 
   routeMapper = {
     LeftButton: (route, navigator, index, navState) =>
-      { 
+      {
         if(route.index > 0) {
           return <TouchableOpacity
             underlayColor='transparent'
@@ -65,14 +62,14 @@ class todo_native extends Component {
     return (
       <Navigator
         initialRoute={{ 
-          title: 'Orange MainPage',
+          title: 'EC ORANGE',
           index: 0,
-          display: true,
-          component: MainView,
+          display: false,
+          component: PosMainView,
         }}
         configureScene={this.configureScene}
         renderScene={(route, navigator) => {
-          return <route.component navigator={navigator} title={route.title} index={route.index} />
+          return <route.component navigator={navigator} title={route.title} index={route.index} data={route.data} />
         }}
         navigationBar={
           <NavigationBar
@@ -86,7 +83,8 @@ class todo_native extends Component {
 const styles = StyleSheet.create({
   navBar: {
     borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    borderBottomColor: '#ddd'
+
   },
   navTitle: {
     paddingTop: 10,
@@ -101,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('todo_native', () => todo_native);
+AppRegistry.registerComponent('native_manga', () => native_manga);

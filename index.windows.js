@@ -14,7 +14,7 @@ import {
   Text, 
   TouchableOpacity, } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import MainView from './app/pages/MainView';
+import MainView from './app/pages/TestPage/MainView';
 import PosMainView from './app/pages/PosMainView';
 
 class NavigationBar extends Navigator.NavigationBar {
@@ -62,7 +62,7 @@ class native_manga extends Component {
     return (
       <Navigator
         initialRoute={{ 
-          title: 'TRUYỆN TRANH',
+          title: 'EC ORANGE',
           index: 0,
           display: false,
           component: PosMainView,

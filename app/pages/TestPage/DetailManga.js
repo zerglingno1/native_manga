@@ -11,11 +11,11 @@ import {
   BackAndroid, 
   TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Util from '../utils/utils';
-import StorageUtil from '../utils/StorageUtil';
-import CheerioUtil from '../utils/CheerioUtil';
-import ReadManga from '../pages/ReadManga';
-import PageHeader from '../components/Common/PageHeader';
+import Util from '../../utils/utils';
+import StorageUtil from '../../utils/StorageUtil';
+import CheerioUtil from '../../utils/CheerioUtil';
+import ReadManga from './ReadManga';
+import PageHeader from '../../components/Common/PageHeader';
 import axios from 'axios';
 
 export default class DetailManga extends Component{

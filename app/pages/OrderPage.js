@@ -205,15 +205,19 @@ export default class OrderPage extends Component {
         });
       break;
       case 'minus':
-        carts = carts.map((item)=> {
+      let tempCart = [];
+        carts.forEach((item)=> {
           if(item.id == cart.id) {
             item.quantity--;
             isHave = true;
           }
-          return item;
+          if (item.quantity > 0) {
+            tempCart.push(item);
+          }
+          
         });
         this.setState({
-          carts
+          carts: tempCart
         });
       break;
     }
@@ -252,7 +256,7 @@ export default class OrderPage extends Component {
             style={ styles.bottomBtn }
             appearance={ {
                 normal: require('../assets/button/btn_blue_bottom.png'),
-                highlight: require('../assets/button/btn_barcode.png')
+                highlight: require('../assets/button/btn_tenkey_g.png')
             } }
             title={'Nút gì đó'}
             onPress={() => {}}/>
@@ -269,20 +273,20 @@ export default class OrderPage extends Component {
                 <Text style={styles.textbox} >{ `Total amount: ${totalView.total}` }</Text>
                 <Text style={styles.textbox} >{ `Total quantity: ${totalView.quantity}` }</Text>
               </View>
-              <Text style={styles.textboxTotal} >{ ` ${totalView.total} $` }</Text>
+              <Text style={styles.textboxTotal} >{ ` ${totalView.total} yen` }</Text>
             </View>
             <ImageButton
             style={ styles.bottomCheckout }
             appearance={ {
                 normal: require('../assets/button/btn_orange_long.png'),
-                highlight: require('../assets/button/btn_orange_long.png')
+                highlight: require('../assets/button/btn_tenkey_g.png')
             } }
             title={'Thanh toán'}/>
             <ImageButton
             style={ styles.bottomBtnCustomer }
             appearance={ {
                 normal: require('../assets/button/btn_blue_bottom.png'),
-                highlight: require('../assets/button/btn_barcode.png')
+                highlight: require('../assets/button/btn_tenkey_g.png')
             } }
             title={'Customer'}
             onPress={() => {}}/>

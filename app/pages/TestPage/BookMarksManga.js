@@ -10,11 +10,11 @@ import {
   Image, 
   TouchableOpacity, 
   BackAndroid } from 'react-native';
-import PageHeader from '../components/Common/PageHeader';
-import Util from '../utils/utils';
-import CheerioUtil from '../utils/CheerioUtil';
-import StorageUtil from '../utils/StorageUtil';
-import DetailManga from '../pages/DetailManga';
+import PageHeader from '../../components/Common/PageHeader';
+import Util from '../../utils/utils';
+import CheerioUtil from '../../utils/CheerioUtil';
+import StorageUtil from '../../utils/StorageUtil';
+import DetailManga from './DetailManga';
 import axios from 'axios';
 
 export default class BookMarksManga extends Component{
@@ -81,7 +81,7 @@ export default class BookMarksManga extends Component{
               }}>
               <View style={styles.recordItem}>
                 <View style={{alignItems: 'center'}}>
-                    <Image resizeMode='stretch' source={(rowData.image) ? {uri: rowData.image} : require('../assets/images/w2.png')} style={styles.recordItemImage}/>
+                    <Image resizeMode='stretch' source={(rowData.image) ? {uri: rowData.image} : require('../../assets/images/w2.png')} style={styles.recordItemImage}/>
                 </View>
                 <Text style={styles.recordItemTitle}>{rowData.title}</Text>
               </View>

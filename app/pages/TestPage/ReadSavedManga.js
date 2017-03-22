@@ -15,13 +15,13 @@ import {
   WebView } from 'react-native';
 import FitImage from 'react-native-fit-image';
 import ActionButton from 'react-native-action-button';
-import PageHeader from '../components/Common/PageHeader';
+import PageHeader from '../../components/Common/PageHeader';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Util from '../utils/utils';
-import CheerioUtil from '../utils/CheerioUtil';
-import StorageUtil from '../utils/StorageUtil';
-import FileUtil from '../utils/FileUtil';
+import Util from '../../utils/utils';
+import CheerioUtil from '../../utils/CheerioUtil';
+import StorageUtil from '../../utils/StorageUtil';
+import FileUtil from '../../utils/FileUtil';
 import axios from 'axios';
 
 export default class ReadSavedManga extends Component{

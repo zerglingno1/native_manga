@@ -10,11 +10,11 @@ import {
   Image, 
   TouchableOpacity, 
   BackAndroid } from 'react-native';
-import PageHeader from '../components/Common/PageHeader';
-import Util from '../utils/utils';
-import CheerioUtil from '../utils/CheerioUtil';
-import StorageUtil from '../utils/StorageUtil';
-import ReadSavedManga from '../pages/ReadSavedManga';
+import PageHeader from '../../components/Common/PageHeader';
+import Util from '../../utils/utils';
+import CheerioUtil from '../../utils/CheerioUtil';
+import StorageUtil from '../../utils/StorageUtil';
+import ReadSavedManga from './ReadSavedManga';
 import axios from 'axios';
 
 export default class SavedManga extends Component{
@@ -83,7 +83,7 @@ export default class SavedManga extends Component{
               }}>
               <View style={styles.recordItem}>
                 <View style={{alignItems: 'center'}}>
-                    <Image resizeMode='stretch' source={(rowData.image) ? {uri: rowData.image} : require('../assets/images/w2.png')} style={styles.recordItemImage}/>
+                    <Image resizeMode='stretch' source={(rowData.image) ? {uri: rowData.image} : require('../../assets/images/w2.png')} style={styles.recordItemImage}/>
                 </View>
                 <Text style={styles.recordItemTitle}>{rowData.title} {' ( ' +Object.keys(rowData.chaps).length + ' CHAP ĐÃ LƯU )'} </Text>
               </View>

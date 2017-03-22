@@ -9,7 +9,6 @@ import Util from '../../utils/utils';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImageButton from '../../components/Common/ImageButton';
 import OrderPage from '../../pages/OrderPage';
-import CategoryManga from '../../pages/CategoryManga';
 import WebViewPage from '../../pages/WebViewPage';
 import Reminder from '../../pages/Reminder';
 
@@ -27,7 +26,7 @@ export default class MainButtons extends Component{
         key: 'customer',
         title: 'Khách hàng',
         image: require('../../assets/button/btn_search_member.png'),
-        component: CategoryManga
+        component: OrderPage
       }, {
         key: 'stock',
         title: 'Hàng hóa',
@@ -52,7 +51,7 @@ export default class MainButtons extends Component{
             style={ styles.btn }
             appearance={ {
                 normal: btn.image,
-                highlight: btn.image
+                highlight: require('../../assets/button/btn_tenkey_g.png')
             } }
             onPress={() => onPressButton(btn.component)}/>
         );

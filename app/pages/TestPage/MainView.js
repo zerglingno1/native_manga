@@ -7,7 +7,7 @@ import {
   ScrollView,
   Image,
   TextInput } from 'react-native';
-import Util from '../utils/utils';
+import Util from '../../utils/utils';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ListManga from './ListManga';
 import BookMarksManga from './BookMarksManga';
@@ -15,8 +15,8 @@ import SearchManga from './SearchManga';
 import HotManga from './HotManga';
 import CategoryManga from './CategoryManga';
 import SavedManga from './SavedManga';
-import Reminder from './Reminder';
-import WebViewPage from './WebViewPage';
+import Reminder from '../Reminder';
+import WebViewPage from '../WebViewPage';
 
 export default class MainView extends Component {
   constructor(props) {
