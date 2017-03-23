@@ -52,7 +52,9 @@ command in the project directory.
 Run project
 ``` react-native run-ios```
 
-#Note
+
+
+# Note
 
 for using "react-native-vector-icons" package 
 
