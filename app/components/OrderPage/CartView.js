@@ -25,7 +25,7 @@ export default class CartView extends Component{
   }
 
   render() {
-    const { navigator, index, cStyles, onPressButton, carts } = this.props;
+    const { cStyles, onPressButton, carts } = this.props;
     const { dataSource } = this.state;
     let source = dataSource.cloneWithRows(carts);
     

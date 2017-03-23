@@ -22,7 +22,7 @@ export default class MainMenus extends Component{
   }
 
   render() {
-    const { navigator, index, cStyles, onPressButton, menus } = this.props;
+    const { cStyles, onPressButton, menus } = this.props;
     const { dataSource } = this.state;
     let source = dataSource.cloneWithRows(menus);
     

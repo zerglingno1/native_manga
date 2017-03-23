@@ -246,8 +246,6 @@ export default class OrderPage extends Component {
             index={index}
             cStyles={styles.header}  />
           <ProductSearch 
-            navigator={navigator} 
-            index={index}
             cStyles={styles.productSearch} 
             products={productShow}
             onGoBack={() => this._onGoBack()}
@@ -263,8 +261,6 @@ export default class OrderPage extends Component {
         </View>
         <View style={styles.rightView}>
           <CartView 
-            navigator={navigator} 
-            index={index}
             cStyles={styles.cartView}
             onPressButton={(cart, type) => {this._onPressControllButton(cart, type);}}
             carts={carts}/>

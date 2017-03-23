@@ -42,7 +42,7 @@ export default class MainButtons extends Component{
   }
 
   render() {
-    const { navigator, index, cStyles, onPressButton } = this.props;
+    const { cStyles, onPressButton } = this.props;
     const { buttons } = this.state;
 
     let btns = buttons.map((btn) => {

@@ -20,7 +20,7 @@ export default class SearchPanel extends Component{
   }
 
   render() {
-    const { navigator, index, cStyles, onPressButton } = this.props;
+    const { cStyles, onPressButton } = this.props;
     
     return(
       <Image style={[styles.watchControlContainer, cStyles]} source={require('../../assets/panel/bg_search_member.png')}>

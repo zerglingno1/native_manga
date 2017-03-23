@@ -19,7 +19,7 @@ export default class SearchPanel extends Component{
   }
 
   render() {
-    const { navigator, index, cStyles } = this.props;
+    const { cStyles } = this.props;
     return(
       <View style={[styles.watchControlContainer, cStyles]}>
         <Text style={styles.textSearch}>{'TIẾNG NHẬT'}</Text>

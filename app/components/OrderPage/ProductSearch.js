@@ -20,16 +20,12 @@ export default class ProductSearch extends Component{
   }
 
   render() {
-    const { navigator, index, cStyles, chooseProduct, products, onGoBack } = this.props;
+    const { cStyles, chooseProduct, products, onGoBack } = this.props;
     return(
       <View style={[styles.watchControlContainer, cStyles]}>
         <SearchPanel 
-          navigator={navigator} 
-          index={index}
           cStyles={styles.searchPanel}/>
         <ProductList 
-          navigator={navigator} 
-          index={index}
           chooseProduct={(item) => chooseProduct(item)}
           products={products}
           onGoBack={() => onGoBack()}

@@ -21,7 +21,7 @@ export default class ProductList extends Component{
   }
 
   render() {
-    const { navigator, index, cStyles, chooseProduct, products, onGoBack } = this.props;
+    const { cStyles, chooseProduct, products, onGoBack } = this.props;
     const { dataSource } =  this.state;
 
     let source = dataSource.cloneWithRows(products);

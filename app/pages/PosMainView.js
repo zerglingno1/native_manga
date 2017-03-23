@@ -72,8 +72,6 @@ export default class PosMainView extends Component {
             <Image style={styles.logoImage} source={require('../assets/images/logo_top.png')} />
             <Text style={styles.startText}> thanks, I also try but that's working inside card so i use working great. </Text>
             <MainButtons 
-              navigator={navigator} 
-              index={index} 
               onPressButton={(component) => { navigator.push({
                 title: ``,
                 index: index + 1,
@@ -82,21 +80,15 @@ export default class PosMainView extends Component {
               }) }} 
               cStyles={styles.mainButtons}  />
             <SearchPanel 
-              navigator={navigator} 
-              index={index} 
               onPressButton={() => {}} 
               cStyles={styles.mainSearch} />
             <MainMenus 
-              navigator={navigator} 
-              index={index} 
               onPressButton={() => {}} 
               cStyles={styles.mainMenus} 
               menus={menus} />
         </View>
         <View style={styles.rightView}>
           <ListOrder 
-              navigator={navigator} 
-              index={index} 
               onPressButton={() => {}} 
               cStyles={styles.ListOrder} 
               data={[]}/>

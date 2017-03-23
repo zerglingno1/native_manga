@@ -29,7 +29,7 @@ export default class ListOrder extends Component{
   }
 
   render() {
-    const { navigator, index, cStyles, onPressButton } = this.props;
+    const { cStyles, onPressButton } = this.props;
     const { dataSource, orders } = this.state;
     let source = dataSource.cloneWithRowsAndSections(orders);
     
