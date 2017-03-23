@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   listHeader: {
     height: 40,
-    width: 800,
+    width: (Util.size.width / 2) - 200,
     flexDirection: 'row', 
     alignItems: 'center',
   },

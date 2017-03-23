@@ -63,7 +63,6 @@ export default class PosMainView extends Component {
   render() {
     const { menus, search } = this.state;
     const { title, navigator, index } = this.props;
-    
     return(
       <Image
         style={styles.mainView}
@@ -132,22 +131,22 @@ const styles = StyleSheet.create({
   },
   startText: {
     flexWrap: 'wrap',
-    width: 240,
+    width: (Util.size.width / 2) / 4,
     maxHeight: 200,
     marginTop: 40
   },
   mainButtons: {
-      width: 460,
+      width: (Util.size.width / 2) / 2,
       height: 120,
       marginTop: 40
   },
   mainSearch: {
-      width: 460,
+      width: (Util.size.width / 2) / 2,
       height: 100,
       marginTop: 0
   },
   mainMenus: {
-      width: 520,
+      width: (Util.size.width / 2) / 2,
       height: 140,
       marginTop: 10,
       flexDirection: 'row', 
@@ -155,8 +154,8 @@ const styles = StyleSheet.create({
       alignItems: 'center',
   },
   ListOrder: {
-      width: 800,
-      height: 800,
+      width: (Util.size.width / 2) - 200,
+      height: Util.size.height  - 200 ,
       flexDirection: 'row', 
   },
 

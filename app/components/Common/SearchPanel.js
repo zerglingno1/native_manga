@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     backgroundColor: '#ffffff',
-    width: 240,
+    flex: 1,
     height: 35,
   },
   btnBarcode: {

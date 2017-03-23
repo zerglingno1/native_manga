@@ -319,7 +319,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   header: {
-    width: 300,
+    width: (Util.size.width / 2) / 2,
     height: 60,
     backgroundColor: 'transparent',
     position: 'absolute',
@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
     top: 50,
   },
   productSearch: {
-    width: 480,
+    width: (Util.size.width / 2) / 2,
   },
   bottomBtn: {
     width: 200,
@@ -337,11 +337,11 @@ const styles = StyleSheet.create({
     left: (Util.size.width / 2 - 480) / 2,
   },
   cartView: {
-    width: 480,
-    height: 600
+    width: (Util.size.width / 2) / 2,
+    height: Util.size.height - 400
   },
   cartTotal: {
-    width: 480,
+    width: (Util.size.width / 2) / 2,
     height: 80,
     backgroundColor: '#ffffff',
     flexDirection: 'row', 

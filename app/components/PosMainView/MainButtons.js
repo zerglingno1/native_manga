@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     width: 120,
-    height: 90,
+    height: 100,
     flex: 1,
     marginLeft: 6,
     marginRight: 6,

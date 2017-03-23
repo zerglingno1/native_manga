@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   listHeader: {
-    width: 480,
+    width: (Util.size.width / 2) / 2,
     height: 30,
     marginRight: 10,
     borderBottomWidth: 1,
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     borderRightColor: '#bbb',
   },
   listTitle: {
-    width: 480,
+    width: (Util.size.width / 2) / 2,
     marginTop: 15,
     marginLeft: 10,
     marginBottom: 15

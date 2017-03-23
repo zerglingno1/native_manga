@@ -103,12 +103,12 @@ const styles = StyleSheet.create({
   },
   listHeader: {
     height: 40,
-    width: 480,
+    width: (Util.size.width / 2) / 2,
     flexDirection: 'row', 
     alignItems: 'center',
   },
   rowView: {
-    width: 480,
+    width: (Util.size.width / 2) / 2,
     height: 100,
     paddingTop: 10, paddingLeft: 10, paddingRight: 10
   },
