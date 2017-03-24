@@ -41,7 +41,7 @@ export default class MainMenus extends Component{
           renderRow={(menu) => 
           <TouchableOpacity style={styles.btn}>
             <Image style={styles.imgBtn} source={require('../../assets/button/btn_tenkey_g.png')}>
-              <Text>{menu.title}</Text>
+              <Text style={styles.titleBtn}>{menu.title}</Text>
             </Image>
           </TouchableOpacity>
           }/>
@@ -90,5 +90,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10
+  },
+  titleBtn: {
+    fontSize: (Util.size.width > 1242) ? 15 : 10,
   }
 });

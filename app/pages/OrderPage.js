@@ -325,7 +325,7 @@ const styles = StyleSheet.create({
     top: 50,
   },
   productSearch: {
-    width: Util.percentToPixel(25, Util.size.width)
+    width: (Util.size.width > 1242) ? Util.percentToPixel(25, Util.size.width) : Util.percentToPixel(30, Util.size.width),
   },
   bottomBtn: {
     width: 200,
@@ -335,11 +335,11 @@ const styles = StyleSheet.create({
     left: ((Util.size.width / 2)  - Util.percentToPixel(30, Util.size.width)) / 2 
   },
   cartView: {
-    width: Util.percentToPixel(25, Util.size.width),
+    width: (Util.size.width > 1242) ? Util.percentToPixel(25, Util.size.width) : Util.percentToPixel(30, Util.size.width),
     height: Util.percentToPixel(60, Util.size.height)
   },
   cartTotal: {
-    width: Util.percentToPixel(25, Util.size.width),
+    width: (Util.size.width > 1242) ? Util.percentToPixel(25, Util.size.width) : Util.percentToPixel(30, Util.size.width),
     height: Util.percentToPixel(12, Util.size.height),
     backgroundColor: '#ffffff',
     flexDirection: 'row', 
@@ -348,7 +348,7 @@ const styles = StyleSheet.create({
   },
   textbox: {
     flex: 1,
-    fontSize: 20
+    fontSize: (Util.size.width > 1242) ? 20 : 18,
   },
   textboxTotal: {
     fontWeight: '500',

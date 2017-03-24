@@ -45,7 +45,7 @@ export default class ProductList extends Component{
           renderRow={(rowData) => 
             <TouchableOpacity underlayColor={'#bbb'} onPress={() => {chooseProduct(rowData);}}>
               <View style={styles.recordItem}>
-                <Text style={[styles.recordItemTitle, {fontWeight: '500'}]}>{rowData.name}</Text>
+                <Text style={[styles.recordItemTitle, {fontWeight: '600'}]}>{rowData.name}</Text>
                 {rowData.type == 0 && (
                   <Text style={styles.recordItemTitle}>{`Price : ${rowData.price} yen`}</Text>)}
               </View>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap'
   },
   recordItem: {
-    height: (Util.size.height > 800) ? 100 : Util.percentToPixel(6.25, Util.size.width),
+    height: (Util.size.height > 1242) ? 100 : Util.percentToPixel(6.25, Util.size.width),
     width: Util.percentToPixel(12.5, Util.size.width) - 20,
     backgroundColor: '#f3f3f3',
     marginTop: 5, marginLeft: 5, marginRight: 15, marginBottom: 5,
@@ -79,10 +79,11 @@ const styles = StyleSheet.create({
   },
   recordItemTitle:{
     backgroundColor: 'transparent',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    fontSize: (Util.size.width > 1242) ? 15 : 10,
   },
   listHeader: {
-    width: Util.percentToPixel(25, Util.size.width),
+    width: (Util.size.width > 1242) ? Util.percentToPixel(25, Util.size.width) : Util.percentToPixel(30, Util.size.width),
     height: 30,
     marginRight: 10,
     borderBottomWidth: 1,
@@ -93,6 +94,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     width: 60,
     height: 30,
+    fontSize: (Util.size.width > 1242) ? 16 : 11,
   },
   headerBorder: {
     flex: 1,
@@ -100,9 +102,10 @@ const styles = StyleSheet.create({
     borderRightColor: '#bbb',
   },
   listTitle: {
-    width: Util.percentToPixel(25, Util.size.width),
+    width: (Util.size.width > 1242) ? Util.percentToPixel(25, Util.size.width) : Util.percentToPixel(30, Util.size.width),
     marginTop: 15,
     marginLeft: 10,
-    marginBottom: 15
+    marginBottom: 15,
+    fontSize: (Util.size.width > 1242) ? 16 : 11,
   }
 });

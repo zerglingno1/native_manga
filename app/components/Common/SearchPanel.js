@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   inputText: {
     backgroundColor: '#ffffff',
     flex: 1,
-    height: 35,
+    height: (Util.size.width > 1242) ? 35 : 20,
   },
   btnBarcode: {
     width: 35,
@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
   textSearch: {
     marginLeft: (Util.size.width > 1242) ? 25 : 10,
     marginTop: 10,
-    fontWeight: '500'
+    fontWeight: '500',
+    fontSize: (Util.size.width > 1242) ? 16 : 11,
   },
   btnSearch: {
     width: 60,

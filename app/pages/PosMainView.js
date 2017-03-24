@@ -131,13 +131,14 @@ const styles = StyleSheet.create({
   startText: {
     flexWrap: 'wrap',
     width: Util.percentToPixel(12.5, Util.size.width),
-    maxHeight: Util.percentToPixel(10, Util.size.height),
-    marginTop: (Util.size.width > 1242) ? 40 : 0
+    height: (Util.size.width > 1242) ? Util.percentToPixel(10, Util.size.height) : Util.percentToPixel(5, Util.size.height),
+    marginTop: (Util.size.width > 1242) ? 30 : 20,
+    fontSize: (Util.size.width > 1242) ? 15 : 10,
   },
   mainButtons: {
       width: Util.percentToPixel(25, Util.size.width),
       height: Util.percentToPixel(10, Util.size.height),
-      marginTop: (Util.size.width > 1242) ? 40 : 0
+      marginTop: (Util.size.width > 1242) ? 0 : 20
   },
   mainSearch: {
       width: Util.percentToPixel(25, Util.size.width),

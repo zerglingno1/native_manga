@@ -103,12 +103,12 @@ const styles = StyleSheet.create({
   },
   listHeader: {
     height: 40,
-    width: Util.percentToPixel(25, Util.size.width),
+    width: (Util.size.width > 1242) ? Util.percentToPixel(25, Util.size.width) : Util.percentToPixel(30, Util.size.width),
     flexDirection: 'row', 
     alignItems: 'center',
   },
   rowView: {
-    width: Util.percentToPixel(25, Util.size.width),
+    width: (Util.size.width > 1242) ? Util.percentToPixel(25, Util.size.width) : Util.percentToPixel(30, Util.size.width),
     height: 100,
     paddingTop: 10, paddingLeft: 10, paddingRight: 10
   },
