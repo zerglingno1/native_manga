@@ -40,12 +40,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   searchPanel: {
-    width: (Util.size.width / 2) / 2,
+    width: Util.percentToPixel(25, Util.size.width),
     height: 80
   },
   productList: {
     marginTop: 10,
-    width: (Util.size.width / 2) / 2,
-    height: Util.size.height - 400
+    width: Util.percentToPixel(25, Util.size.width),
+    height: Util.percentToPixel(45, Util.size.height)
   },
 });

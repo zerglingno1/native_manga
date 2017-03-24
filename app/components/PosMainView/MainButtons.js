@@ -71,12 +71,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   btn: {
-    width: 120,
-    height: 100,
+    width: Util.percentToPixel(6.25, Util.size.width) - 4*10,
+    height: Util.percentToPixel(6.25, Util.size.width) - 4*10 + 20,
     flex: 1,
-    marginLeft: 6,
-    marginRight: 6,
-    marginBottom: 6,
-    marginTop: 6,
+    marginLeft: 5,
+    marginRight: 5,
+    marginBottom: 5,
+    marginTop: 5,
   }
 });

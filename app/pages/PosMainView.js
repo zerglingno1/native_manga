@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   },
   leftView: {
     flex: 1,
-    width: Util.size.width / 2,
+    width: Util.percentToPixel(50, Util.size.width),
     height: Util.size.height,
     backgroundColor:'transparent',
     justifyContent: 'center',
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   rightView: {
     flex: 1,
-    width: Util.size.width / 2,
+    width: Util.percentToPixel(50, Util.size.width),
     height: Util.size.height,
     backgroundColor:'transparent',
     justifyContent: 'center',
@@ -131,31 +131,31 @@ const styles = StyleSheet.create({
   },
   startText: {
     flexWrap: 'wrap',
-    width: (Util.size.width / 2) / 4,
-    maxHeight: 200,
-    marginTop: 40
+    width: Util.percentToPixel(12.5, Util.size.width),
+    maxHeight: Util.percentToPixel(14, Util.size.height),
+    marginTop: (Util.size.width > 800) ? 40 : 0
   },
   mainButtons: {
-      width: (Util.size.width / 2) / 2,
-      height: 120,
-      marginTop: 40
+      width: Util.percentToPixel(25, Util.size.width),
+      height: Util.percentToPixel(10, Util.size.height),
+      marginTop: (Util.size.width > 800) ? 40 : 0
   },
   mainSearch: {
-      width: (Util.size.width / 2) / 2,
-      height: 100,
-      marginTop: 0
+      width: Util.percentToPixel(25, Util.size.width),
+      height: Util.percentToPixel(10, Util.size.height),
+      marginTop: (Util.size.width > 800) ? 20 : 0
   },
   mainMenus: {
-      width: (Util.size.width / 2) / 2,
-      height: 140,
-      marginTop: 10,
+      width: Util.percentToPixel(25, Util.size.width),
+      height: Util.percentToPixel(10, Util.size.height),
+      marginTop: 20,
       flexDirection: 'row', 
       justifyContent: 'center',
       alignItems: 'center',
   },
   ListOrder: {
-      width: (Util.size.width / 2) - 200,
-      height: Util.size.height  - 200 ,
+      width: Util.percentToPixel(35, Util.size.width),
+      height: Util.percentToPixel(70, Util.size.height),
       flexDirection: 'row', 
   },
 

@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap'
   },
   recordItem: {
-    height: 100,
-    width: 225,
+    height: (Util.size.height > 800) ? 100 : Util.percentToPixel(6.25, Util.size.width),
+    width: Util.percentToPixel(12.5, Util.size.width) - 20,
     backgroundColor: '#f3f3f3',
     marginTop: 5, marginLeft: 5, marginRight: 15, marginBottom: 5,
     borderRadius: 10,
@@ -79,9 +79,10 @@ const styles = StyleSheet.create({
   },
   recordItemTitle:{
     backgroundColor: 'transparent',
+    flexWrap: 'wrap'
   },
   listHeader: {
-    width: (Util.size.width / 2) / 2,
+    width: Util.percentToPixel(25, Util.size.width),
     height: 30,
     marginRight: 10,
     borderBottomWidth: 1,
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
     borderRightColor: '#bbb',
   },
   listTitle: {
-    width: (Util.size.width / 2) / 2,
+    width: Util.percentToPixel(25, Util.size.width),
     marginTop: 15,
     marginLeft: 10,
     marginBottom: 15

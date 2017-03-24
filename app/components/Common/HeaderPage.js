@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     paddingTop: 0, paddingLeft: 10, paddingRight: 30, paddingBottom: 0,
   },
   logoImage: {
-    marginLeft: 80
+    marginLeft: 80,
   },
   btnBack: {
   },

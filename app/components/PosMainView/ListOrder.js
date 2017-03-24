@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   listHeader: {
     height: 40,
-    width: (Util.size.width / 2) - 200,
+    width: Util.percentToPixel(35, Util.size.width),
     flexDirection: 'row', 
     alignItems: 'center',
   },

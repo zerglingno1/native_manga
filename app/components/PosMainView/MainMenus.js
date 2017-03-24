@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   btn: {
-    width: 90,
-    height: 90,
+    width: Util.percentToPixel(6.25, Util.size.width) - 6 * 3 + 5,
+    height: Util.percentToPixel(6.25, Util.size.width) - 6 * 3 + 5,
     marginLeft: 3,
     marginRight: 3,
     marginBottom: 3,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 10,
     height: 10,
-    marginLeft: 11
+    marginLeft: 11,
   },
   navigatorLeft: {
     backgroundColor: 'transparent',
@@ -82,11 +82,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 10,
     height: 10,
-    marginRight: 11
+    marginRight: 0,
   },
   imgBtn: {
-    width: 85,
-    height: 85,
+    width: Util.percentToPixel(6.25, Util.size.width) - 6 * 3 + 5,
+    height: Util.percentToPixel(6.25, Util.size.width) - 6 * 3 + 5,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10

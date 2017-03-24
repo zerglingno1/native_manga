@@ -12,6 +12,12 @@ const Util = {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height
   },
+  percentToPixel: (percent, total) => {
+    return (percent * total) / 100;
+  }
 };
+
+//Style Windows 
+
 
 export default Util;

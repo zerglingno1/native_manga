@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
   },
   leftView: {
     flex: 1,
-    width: Util.size.width / 2,
+    width: Util.percentToPixel(50, Util.size.width),
     height: Util.size.height,
     backgroundColor:'transparent',
     justifyContent: 'center',
@@ -312,14 +312,14 @@ const styles = StyleSheet.create({
   },
   rightView: {
     flex: 1,
-    width: Util.size.width / 2,
+    width: Util.percentToPixel(50, Util.size.width),
     height: Util.size.height,
     backgroundColor:'transparent',
     justifyContent: 'center',
     alignItems: 'center',
   },
   header: {
-    width: (Util.size.width / 2) / 2,
+    width: Util.percentToPixel(25, Util.size.width),
     height: 60,
     backgroundColor: 'transparent',
     position: 'absolute',
@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
     top: 50,
   },
   productSearch: {
-    width: (Util.size.width / 2) / 2,
+    width: Util.percentToPixel(25, Util.size.width),
   },
   bottomBtn: {
     width: 200,
@@ -337,12 +337,12 @@ const styles = StyleSheet.create({
     left: (Util.size.width / 2 - 480) / 2,
   },
   cartView: {
-    width: (Util.size.width / 2) / 2,
-    height: Util.size.height - 400
+    width: Util.percentToPixel(30, Util.size.width),
+    height: Util.percentToPixel(60, Util.size.height)
   },
   cartTotal: {
-    width: (Util.size.width / 2) / 2,
-    height: 80,
+    width: Util.percentToPixel(30, Util.size.width),
+    height: Util.percentToPixel(12, Util.size.height),
     backgroundColor: '#ffffff',
     flexDirection: 'row', 
     padding: 10,

@@ -23,7 +23,7 @@ export default class SearchPanel extends Component{
     const { cStyles, onPressButton } = this.props;
     
     return(
-      <Image style={[styles.watchControlContainer, cStyles]} source={require('../../assets/panel/bg_search_member.png')}>
+      <Image style={[styles.watchControlContainer, cStyles]} resizeMode="stretch" source={require('../../assets/panel/bg_search_member.png')}>
         <TextInput style={ styles.input } placeholder='type your id' />
         <ImageButton
           style={ styles.btn }
@@ -47,13 +47,14 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     marginLeft: 20,
+    height: 20,
   },
   btn: {
     width: 60,
-    height: 40,
+    height: 30,
     marginLeft: 10,
     marginRight: 20,
     marginBottom: 5,
-    marginTop: 5
+    marginTop: 10
   }
 });
