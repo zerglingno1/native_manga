@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   headerTitle: {
-    marginRight: 10,
+    paddingLeft: 10,
     width: 60,
     height: 30,
     fontSize: (Util.size.width > 1242) ? 16 : 11,

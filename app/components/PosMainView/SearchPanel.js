@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     marginLeft: 20,
-    height: 20,
+    height: 25,
+    paddingTop: (Util.size.width > 1242) ? 0 :  Util.percentToPixel(4, Util.size.height),
   },
   btn: {
     width: 60,
