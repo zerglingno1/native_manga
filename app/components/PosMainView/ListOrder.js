@@ -83,7 +83,8 @@ const styles = StyleSheet.create({
   sectionHeaderText: {
     marginLeft: 10,
     color: '#ffffff',
-    fontWeight: '400'
+    fontWeight: '400',
+    backgroundColor: '#777',
   },
   rowText : {
     marginLeft: 10,
@@ -103,11 +104,11 @@ const styles = StyleSheet.create({
   },
   sectionHeader: {
     backgroundColor: '#777',
-    width: Util.size.width,
+    width: Util.percentToPixel(35, Util.size.width),
     height: 30
   },
   rowView: {
-    width: Util.size.width,
+    width: Util.percentToPixel(35, Util.size.width),
     height: 40
   }
 });
