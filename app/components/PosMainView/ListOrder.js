@@ -85,6 +85,8 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontWeight: '400',
     backgroundColor: '#777',
+    height: 30,
+    width: Util.percentToPixel(35, Util.size.width),
   },
   rowText : {
     marginLeft: 10,
