@@ -50,7 +50,6 @@ export default class SearchPanel extends Component{
 
 const styles = StyleSheet.create({
   watchControlContainer: {
-    height: 200,
     backgroundColor: '#f3f3f3',
   },
   panel2: {
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
   },
   btnSearchIcon: {
     backgroundColor: '#ffffff',
-    marginLeft: 30,
+    marginLeft: (Util.size.width > 1242) ? 30 : 15,
     height: 35,
     width: 30,
     justifyContent: 'center',
@@ -73,16 +72,17 @@ const styles = StyleSheet.create({
   btnBarcode: {
     width: 35,
     height: 35,
-    marginLeft: 45
+    marginLeft: (Util.size.width > 1242) ? 45 : 15
   },
   textSearch: {
-    marginLeft: 25,
+    marginLeft: (Util.size.width > 1242) ? 25 : 10,
     marginTop: 10,
     fontWeight: '500'
   },
   btnSearch: {
     width: 60,
     height: 35,
-    marginLeft: 10
+    marginLeft: (Util.size.width > 1242) ? 10 : 5,
+    marginRight: (Util.size.width > 1242) ? 10 : 5
   }
 });

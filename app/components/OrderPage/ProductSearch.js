@@ -46,6 +46,6 @@ const styles = StyleSheet.create({
   productList: {
     marginTop: 10,
     width: Util.percentToPixel(25, Util.size.width),
-    height: Util.percentToPixel(45, Util.size.height)
+    height: (Util.size.width > 1242) ? Util.percentToPixel(55, Util.size.height) : Util.percentToPixel(45, Util.size.height)
   },
 });

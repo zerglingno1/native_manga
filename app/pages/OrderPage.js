@@ -294,17 +294,15 @@ export default class OrderPage extends Component {
 
 const styles = StyleSheet.create({
   mainView: {
-    flex: 1,
-    width: undefined,
-    height: undefined,
+    width: Util.size.width,
+    height: Util.size.height,
     backgroundColor:'transparent',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row', 
   },
   leftView: {
-    flex: 1,
-    width: Util.percentToPixel(50, Util.size.width),
+    width: Util.size.width * 23 / 48, // left = 23/48 all width
     height: Util.size.height,
     backgroundColor:'transparent',
     justifyContent: 'center',
@@ -312,7 +310,7 @@ const styles = StyleSheet.create({
   },
   rightView: {
     flex: 1,
-    width: Util.percentToPixel(50, Util.size.width),
+    width: Util.size.width / 2,
     height: Util.size.height,
     backgroundColor:'transparent',
     justifyContent: 'center',
@@ -327,21 +325,21 @@ const styles = StyleSheet.create({
     top: 50,
   },
   productSearch: {
-    width: Util.percentToPixel(25, Util.size.width),
+    width: Util.percentToPixel(25, Util.size.width)
   },
   bottomBtn: {
     width: 200,
     height: 40,
     position: 'absolute',
     bottom: 5,
-    left: (Util.size.width / 2 - 480) / 2,
+    left: ((Util.size.width / 2)  - Util.percentToPixel(30, Util.size.width)) / 2 
   },
   cartView: {
-    width: Util.percentToPixel(30, Util.size.width),
+    width: Util.percentToPixel(25, Util.size.width),
     height: Util.percentToPixel(60, Util.size.height)
   },
   cartTotal: {
-    width: Util.percentToPixel(30, Util.size.width),
+    width: Util.percentToPixel(25, Util.size.width),
     height: Util.percentToPixel(12, Util.size.height),
     backgroundColor: '#ffffff',
     flexDirection: 'row', 
@@ -368,6 +366,6 @@ const styles = StyleSheet.create({
     height: 40,
     position: 'absolute',
     bottom: 5,
-    right: (Util.size.width / 2 - 480) / 2,
+    right: ((Util.size.width / 2)  - Util.percentToPixel(30, Util.size.width)) / 2 ,
   }
 });

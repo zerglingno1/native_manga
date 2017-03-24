@@ -27,7 +27,7 @@ export default class PageHeader extends Component{
           onPress={() => {if (index > 0) {navigator.pop()}}}>
           <Text style={styles.navBackBtn}><Icon size={40} name='arrow-left-circle'></Icon></Text>
         </TouchableOpacity>
-        <Image style={styles.logoImage} source={require('../../assets/images/logo_top.png')} />
+        <Image resizeMode="stretch" style={styles.logoImage} source={require('../../assets/images/logo_top.png')} />
       </View>
     )
   }
@@ -35,14 +35,14 @@ export default class PageHeader extends Component{
 
 const styles = StyleSheet.create({
   watchControlContainer: {
-    width: Util.size.width,
-    height: 40,
+    width: Util.size.width / 2,
     flexDirection:'row',
     backgroundColor: '#f3f3f3',
     paddingTop: 0, paddingLeft: 10, paddingRight: 30, paddingBottom: 0,
   },
   logoImage: {
-    marginLeft: 80,
+    width: (Util.size.width > 1242) ? Util.size.width / 5 : Util.size.width / 4,
+    marginLeft: (Util.size.width > 1242) ? 80 : 20,
   },
   btnBack: {
   },

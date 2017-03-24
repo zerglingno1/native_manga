@@ -112,8 +112,7 @@ const styles = StyleSheet.create({
     shadowRadius: 1.3,
   },
   leftView: {
-    flex: 1,
-    width: Util.percentToPixel(50, Util.size.width),
+    width: Util.percentToPixel((23 / 48) * 100, Util.size.width),
     height: Util.size.height,
     backgroundColor:'transparent',
     justifyContent: 'center',
@@ -132,18 +131,18 @@ const styles = StyleSheet.create({
   startText: {
     flexWrap: 'wrap',
     width: Util.percentToPixel(12.5, Util.size.width),
-    maxHeight: Util.percentToPixel(14, Util.size.height),
-    marginTop: (Util.size.width > 800) ? 40 : 0
+    maxHeight: Util.percentToPixel(10, Util.size.height),
+    marginTop: (Util.size.width > 1242) ? 40 : 0
   },
   mainButtons: {
       width: Util.percentToPixel(25, Util.size.width),
       height: Util.percentToPixel(10, Util.size.height),
-      marginTop: (Util.size.width > 800) ? 40 : 0
+      marginTop: (Util.size.width > 1242) ? 40 : 0
   },
   mainSearch: {
       width: Util.percentToPixel(25, Util.size.width),
       height: Util.percentToPixel(10, Util.size.height),
-      marginTop: (Util.size.width > 800) ? 20 : 0
+      marginTop: (Util.size.width > 1242) ? 20 : 0
   },
   mainMenus: {
       width: Util.percentToPixel(25, Util.size.width),
