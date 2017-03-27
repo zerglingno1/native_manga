@@ -18,25 +18,33 @@ export default class MainButtons extends Component{
     super(props);
     this.state = {
       buttons: [{
-        key: 'checkout',
         title: 'Thanh toán',
         image: require('../../../public/button/btn_newaccount.png'),
-        component: OrderPage
+        type: 'push',
+        route: {
+          key: 'order'
+        }
       }, {
-        key: 'customer',
         title: 'Khách hàng',
         image: require('../../../public/button/btn_search_member.png'),
-        component: OrderPage
+        type: 'push',
+        route: {
+          key: 'order'
+        }
       }, {
-        key: 'stock',
         title: 'Hàng hóa',
         image: require('../../../public/button/btn_search_stock.png'),
-        component: WebViewPage
+        type: 'push',
+        route: {
+          key: 'webview'
+        }
       }, {
-        key: 'register',
         title: 'Đăng ký',
         image: require('../../../public/button/btn_temp_member_register.png'),
-        component: Reminder
+        type: 'push',
+        route: {
+          key: 'reminder'
+        }
       }]
     };
   }
@@ -53,7 +61,7 @@ export default class MainButtons extends Component{
                 normal: btn.image,
                 highlight: require('../../../public/button/btn_tenkey_g.png')
             } }
-            onPress={() => onPressButton(btn.component)}/>
+            onPress={() => onPressButton(btn)}/>
         );
     });
     

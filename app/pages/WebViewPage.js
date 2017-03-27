@@ -41,6 +41,7 @@ export default class WebViewPage extends Component {
   };
 
   render() {
+    const { _goBack } = this.props
     this.inputText = this.state.url;
 
     let source = {uri: this.state.url};
@@ -48,7 +49,7 @@ export default class WebViewPage extends Component {
       <View style={[styles.container]}>
         <View style={[styles.addressBarRow]}>
           <TouchableOpacity
-            onPress={this.goOut}
+            onPress={_goBack}
             style={this.state.backButtonEnabled ? styles.navButton : styles.disabledButton}>
             <Text>
                <Icon size={20} name='ios-close-outline'></Icon>
@@ -157,11 +158,6 @@ export default class WebViewPage extends Component {
   goBack = () => {
     const { index } = this.state;
     this.webview[index].goBack();
-  };
-
-  goOut = () => {
-    const { navigator, index } = this.props;
-    if (index > 0) {navigator.pop()}
   };
 
   goForward = () => {

@@ -18,13 +18,13 @@ export default class PageHeader extends Component{
   }
 
   render() {
-    const { navigator, index, cStyles } = this.props;
+    const { navigator, index, cStyles, _goBack } = this.props;
     return(
       <View style={[styles.watchControlContainer, cStyles]}>
         <TouchableOpacity
         style={styles.btnBack}
           underlayColor='transparent'
-          onPress={() => {if (index > 0) {navigator.pop()}}}>
+          onPress={_goBack}>
           <Text style={styles.navBackBtn}><Icon size={40} name='arrow-left-circle'></Icon></Text>
         </TouchableOpacity>
         <Image style={styles.logoImage} source={require('../../../public/images/logo_top.png')} />

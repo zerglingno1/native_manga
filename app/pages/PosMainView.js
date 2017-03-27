@@ -62,7 +62,7 @@ export default class PosMainView extends Component {
 
   render() {
     const { menus, search } = this.state;
-    const { title, navigator, index } = this.props;
+    const { title, navigator, index, _handleNavigate } = this.props;
     
     return(
       <Image
@@ -72,12 +72,7 @@ export default class PosMainView extends Component {
             <Image style={styles.logoImage} source={require('../../public/images/logo_top.png')} />
             <Text style={styles.startText}> thanks, I also try but that's working inside card so i use working great. </Text>
             <MainButtons 
-              onPressButton={(component) => { navigator.push({
-                title: ``,
-                index: index + 1,
-                display: false,
-                component: component
-              }) }} 
+              onPressButton={(route) => { _handleNavigate(route) }} 
               cStyles={styles.mainButtons}  />
             <SearchPanel 
               onPressButton={() => {}} 

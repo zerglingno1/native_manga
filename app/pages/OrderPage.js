@@ -233,7 +233,7 @@ export default class OrderPage extends Component {
 
   render() {
     const { menus, search, carts, productShow } = this.state;
-    const { title, navigator, index } = this.props;
+    const { title, navigator, index, _goBack, _handleNavigate } = this.props;
     
     let totalView = this.totalMount();
     return(
@@ -244,7 +244,8 @@ export default class OrderPage extends Component {
           <HeaderPage 
             navigator={navigator} 
             index={index}
-            cStyles={styles.header}  />
+            cStyles={styles.header}
+            _goBack={_goBack} />
           <ProductSearch 
             cStyles={styles.productSearch} 
             products={productShow}
@@ -273,6 +274,16 @@ export default class OrderPage extends Component {
             </View>
             <ImageButton
             style={ styles.bottomCheckout }
+            onPress={
+              () => {
+                _handleNavigate({
+                  type: 'push',
+                  route: {
+                    key: 'reminder'
+                  }
+                });
+              }
+            }
             appearance={ {
                 normal: require('../../public/button/btn_orange_long.png'),
                 highlight: require('../../public/button/btn_tenkey_g.png')
