@@ -67,9 +67,9 @@ export default class PosMainView extends Component {
     return(
       <Image
         style={styles.mainView}
-        source={require('../assets/images/bg_all.png')}>
+        source={require('../../public/images/bg_all.png')}>
         <View style={styles.leftView}>
-            <Image style={styles.logoImage} source={require('../assets/images/logo_top.png')} />
+            <Image style={styles.logoImage} source={require('../../public/images/logo_top.png')} />
             <Text style={styles.startText}> thanks, I also try but that's working inside card so i use working great. </Text>
             <MainButtons 
               onPressButton={(component) => { navigator.push({

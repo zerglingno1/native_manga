@@ -23,13 +23,13 @@ export default class SearchPanel extends Component{
     const { cStyles, onPressButton } = this.props;
     
     return(
-      <Image style={[styles.watchControlContainer, cStyles]} source={require('../../assets/panel/bg_search_member.png')}>
+      <Image style={[styles.watchControlContainer, cStyles]} source={require('../../../public/panel/bg_search_member.png')}>
         <TextInput style={ styles.input } placeholder='type your id' />
         <ImageButton
           style={ styles.btn }
           appearance={ {
-              normal: require('../../assets/button/btn_search.png'),
-              highlight: require('../../assets/button/btn_search.png')
+              normal: require('../../../public/button/btn_search.png'),
+              highlight: require('../../../public/button/btn_search.png')
           } }
           onPress={onPressButton}/>
       </Image>

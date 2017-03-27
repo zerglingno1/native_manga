@@ -37,7 +37,7 @@ export default class CartView extends Component{
         enableEmptySections = {true} 
         dataSource={source}
         renderSeparator={(sectionId, rowId) => <View style={styles.separator} />}
-        renderHeader={() => (<Image source={require('../../assets/panel/bg_headline.png')} style={styles.listHeader}>
+        renderHeader={() => (<Image source={require('../../../public/panel/bg_headline.png')} style={styles.listHeader}>
             <Text style={styles.headerTitle}>{'TIENG NHAT'}</Text>
             </Image>)}
         renderRow={(cart) => 
@@ -47,22 +47,22 @@ export default class CartView extends Component{
                 <ImageButton
                   style={ styles.discountBtn }
                   appearance={ {
-                    normal: require('../../assets/button/btn_discount.png'),
-                    highlight: require('../../assets/button/btn_tenkey_g.png'),
+                    normal: require('../../../public/button/btn_discount.png'),
+                    highlight: require('../../../public/button/btn_tenkey_g.png'),
                   } }
                   onPress={() => {onPressButton(cart, 'discount')}}/>
                   <ImageButton
                   style={ styles.bottomBtn }
                   appearance={ {
-                    normal: require('../../assets/button/btn_minus.png'),
-                    highlight: require('../../assets/button/btn_tenkey_g.png'),
+                    normal: require('../../../public/button/btn_minus.png'),
+                    highlight: require('../../../public/button/btn_tenkey_g.png'),
                   } }
                   onPress={() => {onPressButton(cart, 'minus');}}/>
                   <ImageButton
                   style={ styles.bottomBtn }
                   appearance={ {
-                    normal: require('../../assets/button/btn_plus.png'),
-                    highlight: require('../../assets/button/btn_tenkey_g.png'),
+                    normal: require('../../../public/button/btn_plus.png'),
+                    highlight: require('../../../public/button/btn_tenkey_g.png'),
                   } }
                   onPress={() => {onPressButton(cart, 'add');}}/>
               </View>

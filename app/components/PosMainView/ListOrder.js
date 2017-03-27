@@ -41,7 +41,7 @@ export default class ListOrder extends Component{
         enableEmptySections = {true} 
         dataSource={source}
         renderSeparator={(sectionId, rowId) => <View style={styles.separator} />}
-        renderHeader={() => (<Image source={require('../../assets/panel/bg_headline.png')} style={styles.listHeader}>
+        renderHeader={() => (<Image source={require('../../../public/panel/bg_headline.png')} style={styles.listHeader}>
             <Text style={styles.headerTitle}>{'TIENG NHAT'}</Text>
             <Picker
                 style={styles.headPicker}
@@ -51,7 +51,7 @@ export default class ListOrder extends Component{
             </Picker>
             </Image>)}
         renderSectionHeader={(sectionData, category) => (
-            <Image source={require('../../assets/panel/bg_headline_small.png')} style={styles.sectionHeader}>
+            <Image source={require('../../../public/panel/bg_headline_small.png')} style={styles.sectionHeader}>
                 <Text style={styles.sectionHeaderText}>{category}</Text>
             </Image>
         )}

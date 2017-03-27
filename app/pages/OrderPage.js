@@ -239,7 +239,7 @@ export default class OrderPage extends Component {
     return(
       <Image
         style={styles.mainView}
-        source={require('../assets/images/bg_all.png')}>
+        source={require('../../public/images/bg_all.png')}>
         <View style={styles.leftView}>
           <HeaderPage 
             navigator={navigator} 
@@ -253,8 +253,8 @@ export default class OrderPage extends Component {
           <ImageButton
             style={ styles.bottomBtn }
             appearance={ {
-                normal: require('../assets/button/btn_blue_bottom.png'),
-                highlight: require('../assets/button/btn_tenkey_g.png')
+                normal: require('../../public/button/btn_blue_bottom.png'),
+                highlight: require('../../public/button/btn_tenkey_g.png')
             } }
             title={'Nút gì đó'}
             onPress={() => {}}/>
@@ -274,15 +274,15 @@ export default class OrderPage extends Component {
             <ImageButton
             style={ styles.bottomCheckout }
             appearance={ {
-                normal: require('../assets/button/btn_orange_long.png'),
-                highlight: require('../assets/button/btn_tenkey_g.png')
+                normal: require('../../public/button/btn_orange_long.png'),
+                highlight: require('../../public/button/btn_tenkey_g.png')
             } }
             title={'Thanh toán'}/>
             <ImageButton
             style={ styles.bottomBtnCustomer }
             appearance={ {
-                normal: require('../assets/button/btn_blue_bottom.png'),
-                highlight: require('../assets/button/btn_tenkey_g.png')
+                normal: require('../../public/button/btn_blue_bottom.png'),
+                highlight: require('../../public/button/btn_tenkey_g.png')
             } }
             title={'Customer'}
             onPress={() => {}}/>

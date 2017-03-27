@@ -20,22 +20,22 @@ export default class MainButtons extends Component{
       buttons: [{
         key: 'checkout',
         title: 'Thanh toán',
-        image: require('../../assets/button/btn_newaccount.png'),
+        image: require('../../../public/button/btn_newaccount.png'),
         component: OrderPage
       }, {
         key: 'customer',
         title: 'Khách hàng',
-        image: require('../../assets/button/btn_search_member.png'),
+        image: require('../../../public/button/btn_search_member.png'),
         component: OrderPage
       }, {
         key: 'stock',
         title: 'Hàng hóa',
-        image: require('../../assets/button/btn_search_stock.png'),
+        image: require('../../../public/button/btn_search_stock.png'),
         component: WebViewPage
       }, {
         key: 'register',
         title: 'Đăng ký',
-        image: require('../../assets/button/btn_temp_member_register.png'),
+        image: require('../../../public/button/btn_temp_member_register.png'),
         component: Reminder
       }]
     };
@@ -51,7 +51,7 @@ export default class MainButtons extends Component{
             style={ styles.btn }
             appearance={ {
                 normal: btn.image,
-                highlight: require('../../assets/button/btn_tenkey_g.png')
+                highlight: require('../../../public/button/btn_tenkey_g.png')
             } }
             onPress={() => onPressButton(btn.component)}/>
         );

@@ -27,8 +27,8 @@ export default class SearchPanel extends Component{
           <ImageButton
             style={ styles.btnBarcode }
             appearance={ {
-                normal: require('../../assets/button/btn_barcode.png'),
-                highlight: require('../../assets/button/btn_barcode.png')
+                normal: require('../../../public/button/btn_barcode.png'),
+                highlight: require('../../../public/button/btn_barcode.png')
             } }
             onPress={() => {}}/>
           <TouchableOpacity style={ styles.btnSearchIcon }>
@@ -38,8 +38,8 @@ export default class SearchPanel extends Component{
           <ImageButton
           style={ styles.btnSearch }
           appearance={ {
-              normal: require('../../assets/button//btn_search.png'),
-              highlight: require('../../assets/button/btn_search.png')
+              normal: require('../../../public/button//btn_search.png'),
+              highlight: require('../../../public/button/btn_search.png')
           } }
           onPress={() => {}}/>
         </View>

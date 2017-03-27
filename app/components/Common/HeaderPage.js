@@ -27,7 +27,7 @@ export default class PageHeader extends Component{
           onPress={() => {if (index > 0) {navigator.pop()}}}>
           <Text style={styles.navBackBtn}><Icon size={40} name='arrow-left-circle'></Icon></Text>
         </TouchableOpacity>
-        <Image style={styles.logoImage} source={require('../../assets/images/logo_top.png')} />
+        <Image style={styles.logoImage} source={require('../../../public/images/logo_top.png')} />
       </View>
     )
   }

@@ -30,7 +30,7 @@ export default class MainMenus extends Component{
       <View style={cStyles}>
         <Image
         style={styles.navigatorLeft}
-        source={require('../../assets/button/icon_arrow_left.png')}/>
+        source={require('../../../public/button/icon_arrow_left.png')}/>
         <ListView
           style={styles.watchControlContainer}
           ref='list'
@@ -40,14 +40,14 @@ export default class MainMenus extends Component{
           dataSource={source}
           renderRow={(menu) => 
           <TouchableOpacity style={styles.btn}>
-            <Image style={styles.imgBtn} source={require('../../assets/button/btn_tenkey_g.png')}>
+            <Image style={styles.imgBtn} source={require('../../../public/button/btn_tenkey_g.png')}>
               <Text>{menu.title}</Text>
             </Image>
           </TouchableOpacity>
           }/>
         <Image
           style={styles.navigatorRight}
-          source={require('../../assets/button/icon_arrow_right.png')}/>
+          source={require('../../../public/button/icon_arrow_right.png')}/>
       </View>
     )
   }
