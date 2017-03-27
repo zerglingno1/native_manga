@@ -11,6 +11,7 @@ import ImageButton from '../../components/Common/ImageButton';
 import OrderPage from '../../pages/OrderPage';
 import WebViewPage from '../../pages/WebViewPage';
 import Reminder from '../../pages/Reminder';
+import styleSheet from '../../styles/PosMainView/MainButtons';
 
 export default class MainButtons extends Component{
 
@@ -73,18 +74,4 @@ export default class MainButtons extends Component{
   }
 }
 
-const styles = StyleSheet.create({
-  watchControlContainer: {
-    flexDirection:'row',
-    backgroundColor: 'transparent',
-  },
-  btn: {
-    width: 120,
-    height: 90,
-    flex: 1,
-    marginLeft: 6,
-    marginRight: 6,
-    marginBottom: 6,
-    marginTop: 6,
-  }
-});
+const styles = styleSheet();

@@ -10,6 +10,8 @@ import Util from '../../utils/utils';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImageButton from '../Common/ImageButton';
 
+import styleSheet from '../../styles/Common/ProductList';
+
 export default class ProductList extends Component{
 
   constructor(props) {
@@ -56,52 +58,4 @@ export default class ProductList extends Component{
   }
 }
 
-const styles = StyleSheet.create({
-  watchControlContainer: {
-    backgroundColor: '#f3f3f3',
-  },
-  recordList: {
-    paddingTop: 5, paddingLeft: 10, paddingRight: 10, paddingBottom: 5,
-  },
-  recordListContainer: {
-    flexDirection: 'column',
-    flexWrap: 'wrap'
-  },
-  recordItem: {
-    height: 100,
-    width: 225,
-    backgroundColor: '#f3f3f3',
-    marginTop: 5, marginLeft: 5, marginRight: 15, marginBottom: 5,
-    borderRadius: 10,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#bbb',
-  },
-  recordItemTitle:{
-    backgroundColor: 'transparent',
-  },
-  listHeader: {
-    width: 480,
-    height: 30,
-    marginRight: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#bbb',
-    flexDirection: 'row',
-  },
-  headerTitle: {
-    marginRight: 10,
-    width: 60,
-    height: 30,
-  },
-  headerBorder: {
-    flex: 1,
-    borderRightWidth: 1,
-    borderRightColor: '#bbb',
-  },
-  listTitle: {
-    width: 480,
-    marginTop: 15,
-    marginLeft: 10,
-    marginBottom: 15
-  }
-});
+const styles = styleSheet();

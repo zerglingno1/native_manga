@@ -7,12 +7,13 @@ import {
   ScrollView,
   Image,
   TextInput } from 'react-native';
-import Util from '../utils/utils';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MainButtons from '../components/PosMainView/MainButtons';
 import SearchPanel from '../components/PosMainView/SearchPanel';
 import MainMenus from '../components/PosMainView/MainMenus';
 import ListOrder from '../components/PosMainView/ListOrder';
+
+import styleSheet from '../styles/PosMainView';
 
 export default class PosMainView extends Component {
   constructor(props) {
@@ -93,66 +94,4 @@ export default class PosMainView extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  mainView: {
-    flex: 1,
-    width: undefined,
-    height: undefined,
-    backgroundColor:'transparent',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row', 
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: .3,
-    shadowRadius: 1.3,
-  },
-  leftView: {
-    flex: 1,
-    width: Util.size.width / 2,
-    height: Util.size.height,
-    backgroundColor:'transparent',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  rightView: {
-    flex: 1,
-    width: Util.size.width / 2,
-    height: Util.size.height,
-    backgroundColor:'transparent',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logoImage: {
-  },
-  startText: {
-    flexWrap: 'wrap',
-    width: 240,
-    maxHeight: 200,
-    marginTop: 40
-  },
-  mainButtons: {
-      width: 460,
-      height: 120,
-      marginTop: 40
-  },
-  mainSearch: {
-      width: 460,
-      height: 100,
-      marginTop: 0
-  },
-  mainMenus: {
-      width: 520,
-      height: 140,
-      marginTop: 10,
-      flexDirection: 'row', 
-      justifyContent: 'center',
-      alignItems: 'center',
-  },
-  ListOrder: {
-      width: 800,
-      height: 800,
-      flexDirection: 'row', 
-  },
-
-});
+const styles = styleSheet();

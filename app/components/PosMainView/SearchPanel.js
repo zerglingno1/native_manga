@@ -11,6 +11,8 @@ import Util from '../../utils/utils';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImageButton from '../../components/Common/ImageButton';
 
+import styleSheet from '../../styles/PosMainView/SearchPanel';
+
 export default class SearchPanel extends Component{
 
   constructor(props) {
@@ -37,23 +39,4 @@ export default class SearchPanel extends Component{
   }
 }
 
-const styles = StyleSheet.create({
-  watchControlContainer: {
-    backgroundColor:'transparent',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  input: {
-    flex: 1,
-    marginLeft: 20,
-  },
-  btn: {
-    width: 60,
-    height: 40,
-    marginLeft: 10,
-    marginRight: 20,
-    marginBottom: 5,
-    marginTop: 5
-  }
-});
+const styles = styleSheet();

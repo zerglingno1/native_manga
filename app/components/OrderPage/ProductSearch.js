@@ -11,6 +11,8 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import SearchPanel from '../Common/SearchPanel';
 import ProductList from '../Common/ProductList';
 
+import styleSheet from '../../styles/OrderPage/ProductSearch';
+
 export default class ProductSearch extends Component{
 
   constructor(props) {
@@ -35,17 +37,4 @@ export default class ProductSearch extends Component{
   }
 }
 
-const styles = StyleSheet.create({
-  watchControlContainer: {
-    backgroundColor: 'transparent',
-  },
-  searchPanel: {
-    width: 480,
-    height: 80
-  },
-  productList: {
-    marginTop: 10,
-    width: 480,
-    height: 560
-  },
-});
+const styles = styleSheet();

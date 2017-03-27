@@ -9,6 +9,8 @@ import {
 import Util from '../../utils/utils';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
+import styleSheet from '../../styles/Common/HeaderPage';
+
 export default class PageHeader extends Component{
 
   constructor(props) {
@@ -33,24 +35,4 @@ export default class PageHeader extends Component{
   }
 }
 
-const styles = StyleSheet.create({
-  watchControlContainer: {
-    width: Util.size.width,
-    height: 40,
-    flexDirection:'row',
-    backgroundColor: '#f3f3f3',
-    paddingTop: 0, paddingLeft: 10, paddingRight: 30, paddingBottom: 0,
-  },
-  logoImage: {
-    marginLeft: 80
-  },
-  btnBack: {
-  },
-  navBackBtn: {
-    marginTop: 2,
-    height: 45,
-    width: 45,
-    fontSize: 25,
-    color: '#555',
-  },
-});
+const styles = styleSheet();
