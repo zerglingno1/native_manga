@@ -101,31 +101,31 @@ export default styleSheet = () => {
         },
         startText: {
             flexWrap: 'wrap',
-            width: 400,
-            maxHeight: 300,
+            width: 300,
+            maxHeight: 100,
             marginTop: 40
         },
         mainButtons: {
-            width: 600,
-            height: 240,
+            width: 400,
+            height: 110,
             marginTop: 40
         },
         mainSearch: {
-            width: 600,
-            height: 200,
+            width: 400,
+            height: 100,
             marginTop: 0
         },
         mainMenus: {
-            width: 600,
-            height: 240,
+            width: 400,
+            height: 140,
             marginTop: 10,
             flexDirection: 'row', 
             justifyContent: 'center',
             alignItems: 'center',
         },
         ListOrder: {
-            width: 800,
-            height: 800,
+            width: 450,
+            height: 600,
             flexDirection: 'row', 
         },
 

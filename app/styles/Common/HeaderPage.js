@@ -24,5 +24,27 @@ export default styleSheet = () => {
             color: '#555',
         },
     });
+  } else if (Platform.OS === 'ios') {
+    return StyleSheet.create({
+        watchControlContainer: {
+            width: 300,
+            height: 40,
+            flexDirection:'row',
+            backgroundColor: '#f3f3f3',
+            paddingTop: 0, paddingLeft: 10, paddingRight: 30, paddingBottom: 0,
+        },
+        logoImage: {
+            marginLeft: 40
+        },
+        btnBack: {
+        },
+        navBackBtn: {
+            marginTop: 2,
+            height: 45,
+            width: 45,
+            fontSize: 25,
+            color: '#555',
+        },
+    });
   }
 }

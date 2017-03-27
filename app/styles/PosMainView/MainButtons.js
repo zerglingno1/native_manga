@@ -26,7 +26,7 @@ export default styleSheet = () => {
         },
         btn: {
             width: 120,
-            height: 90,
+            height: 80,
             flex: 1,
             marginLeft: 6,
             marginRight: 6,
