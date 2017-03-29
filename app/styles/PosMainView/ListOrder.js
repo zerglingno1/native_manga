@@ -61,7 +61,7 @@ export default styleSheet = () => {
             backgroundColor: '#8E8E8E',
         },
         headerTitle: {
-            marginLeft: 10,
+            paddingLeft: 10,
             flex: 1,
             fontWeight: '500'
         },
@@ -80,7 +80,7 @@ export default styleSheet = () => {
         headPicker: {
             width: 150,
             height: 30,
-            marginRight: 10,
+            paddingRight: 10,
         },
         listHeader: {
             height: 40,

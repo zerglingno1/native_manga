@@ -62,7 +62,9 @@ export default styleSheet = () => {
         },
         recordListContainer: {
             flexDirection: 'column',
-            flexWrap: 'wrap'
+            flexWrap: 'wrap',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start'
         },
         recordItem: {
             height: 100,
