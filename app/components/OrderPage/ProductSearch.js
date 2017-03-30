@@ -37,4 +37,4 @@ export default class ProductSearch extends Component{
   }
 }
 
-const styles = styleSheet();
+const styles = styleSheet;

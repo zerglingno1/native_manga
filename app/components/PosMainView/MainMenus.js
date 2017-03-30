@@ -55,4 +55,4 @@ export default class MainMenus extends Component{
   }
 }
 
-const styles = styleSheet();
+const styles = styleSheet;

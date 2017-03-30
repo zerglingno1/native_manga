@@ -74,4 +74,4 @@ export default class MainButtons extends Component{
   }
 }
 
-const styles = styleSheet();
+const styles = styleSheet;

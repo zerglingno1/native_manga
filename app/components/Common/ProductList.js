@@ -58,4 +58,4 @@ export default class ProductList extends Component{
   }
 }
 
-const styles = styleSheet();
+const styles = styleSheet;

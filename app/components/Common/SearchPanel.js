@@ -30,7 +30,7 @@ export default class SearchPanel extends Component{
             style={ styles.btnBarcode }
             appearance={ {
                 normal: require('../../../public/button/btn_barcode.png'),
-                highlight: require('../../../public/button/btn_barcode.png')
+                highlight: require('../../../public/button/btn_tenkey_g.png')
             } }
             onPress={() => {}}/>
           <TouchableOpacity style={ styles.btnSearchIcon }>
@@ -41,7 +41,7 @@ export default class SearchPanel extends Component{
           style={ styles.btnSearch }
           appearance={ {
               normal: require('../../../public/button//btn_search.png'),
-              highlight: require('../../../public/button/btn_search.png')
+              highlight: require('../../../public/button/btn_tenkey_g.png')
           } }
           onPress={() => {}}/>
         </View>
@@ -50,4 +50,4 @@ export default class SearchPanel extends Component{
   }
 }
 
-const styles = styleSheet();
+const styles = styleSheet;

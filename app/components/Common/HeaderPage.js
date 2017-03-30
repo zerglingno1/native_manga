@@ -35,4 +35,4 @@ export default class PageHeader extends Component{
   }
 }
 
-const styles = styleSheet();
+const styles = styleSheet;

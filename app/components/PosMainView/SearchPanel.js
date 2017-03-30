@@ -31,7 +31,7 @@ export default class SearchPanel extends Component{
           style={ styles.btn }
           appearance={ {
               normal: require('../../../public/button/btn_search.png'),
-              highlight: require('../../../public/button/btn_search.png')
+              highlight: require('../../../public/button/btn_tenkey_g.png')
           } }
           onPress={onPressButton}/>
       </Image>
@@ -39,4 +39,4 @@ export default class SearchPanel extends Component{
   }
 }
 
-const styles = styleSheet();
+const styles = styleSheet;

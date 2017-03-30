@@ -77,4 +77,4 @@ export default class CartView extends Component{
   }
 }
 
-const styles = styleSheet();
+const styles = styleSheet;

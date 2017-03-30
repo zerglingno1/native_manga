@@ -305,4 +305,4 @@ export default class OrderPage extends Component {
   }
 }
 
-const styles = styleSheet();
+const styles = styleSheet;

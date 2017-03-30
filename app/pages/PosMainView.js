@@ -94,4 +94,4 @@ export default class PosMainView extends Component {
   }
 }
 
-const styles = styleSheet();
+const styles = styleSheet;
