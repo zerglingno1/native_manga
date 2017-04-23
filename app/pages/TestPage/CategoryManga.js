@@ -121,6 +121,7 @@ export default class CategoryManga extends Component{
           renderHeader = {() => <View style={{height: 10, backgroundColor: '#f5f5f5'}} />}
           enableEmptySections = {true} 
           dataSource={source}
+          pageSize={9999999}
           contentContainerStyle={{flexDirection: 'row', flexWrap: 'wrap'}}
           renderRow={(rowData) => 
             <TouchableOpacity underlayColor={'#bbb'} onPress={() => {
@@ -149,8 +150,8 @@ const styles = StyleSheet.create({
     paddingTop: 5, paddingLeft: 10, paddingRight: 10, paddingBottom: 5,
   },
   recordItem: {
-    height: 130,
-    width: 130,
+    height: 120,
+    width: 120,
     backgroundColor: '#f3f3f3',
     marginTop: 15, marginLeft: 15, marginRight: 15, marginBottom: 15,
     alignItems: 'center',

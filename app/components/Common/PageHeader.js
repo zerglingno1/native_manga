@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     width: Util.size.width,
     height: 40,
     flexDirection:'row',
-    backgroundColor: '#f3f3f3',
+    backgroundColor: '#ffffff',
     paddingTop: 0, paddingLeft: 10, paddingRight: 30, paddingBottom: 0,
   },
   navBackBtn: {

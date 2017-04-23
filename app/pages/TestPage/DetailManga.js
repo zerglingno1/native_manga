@@ -11,9 +11,11 @@ import {
   BackAndroid, 
   TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Util from '../../utils/utils';
 import StorageUtil from '../../utils/StorageUtil';
 import CheerioUtil from '../../utils/CheerioUtil';
+import FileUtil from '../../utils/FileUtil';
 import ReadManga from './ReadManga';
 import PageHeader from '../../components/Common/PageHeader';
 import axios from 'axios';
@@ -36,7 +38,11 @@ export default class DetailManga extends Component{
   componentWillMount() {
     const { host } = this.state;
     const { data } = this.props;
-    this._startLoad(host, data);
+
+    this.setState({
+      host: data.url
+    });
+    this._startLoad(data.url, data.manga);
     
     BackAndroid.addEventListener('hardwareBackPress', () => {
       const { navigator, index } = this.props;
@@ -50,7 +56,7 @@ export default class DetailManga extends Component{
 
   async loadHistory() {
     const { data } = this.props;
-    let chap = await StorageUtil.getHistory(data.id);
+    let chap = await StorageUtil.getHistory(data.manga.id);
 
     this.setState({
       history: chap
@@ -61,46 +67,84 @@ export default class DetailManga extends Component{
   }
 
   _startLoad(host, data) {
-    axios({method: 'GET', url: host + data.url, params: { }})
-      .then(async (response) => {
-        let introduce = CheerioUtil.getDetailMangaIntroduce(response.data);
-        this.setState({
-          introduce
-        });
-        axios({method: 'GET', url: host + '/ajax/Chapter/LoadListChapter?id=' + data.id, params: { }})
+    switch(host) {
+      case 'http://m.blogtruyen.com':
+        axios({method: 'GET', url: host + data.url, params: { }})
         .then(async (response) => {
-          let chaps = CheerioUtil.getDetailMangaChaps(response.data);
+          let introduce = CheerioUtil.getDetailMangaIntroduce(response.data);
           this.setState({
-            chaps
+            introduce
+          });
+          axios({method: 'GET', url: host + '/ajax/Chapter/LoadListChapter?id=' + data.id, params: { }})
+          .then(async (response) => {
+            let chaps = CheerioUtil.getDetailMangaChaps(response.data);
+            this.setState({
+              chaps
+            });
+          })
+          .catch((error) => {
+            console.warn(error);
           });
         })
         .catch((error) => {
           console.warn(error);
         });
-      })
-      .catch((error) => {
-        console.warn(error);
-      });
+      break;
+      case 'http://hamtruyen.vn':
+        axios({method: 'GET', url: host + data.url, params: { }})
+        .then(async (response) => {
+          let detail = CheerioUtil.getDetailManga(response.data);
+          this.setState({
+            introduce: detail.introduce,
+            chaps: detail.listChap
+          });
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+      break;
+    }
   }
 
-  _openChap(row, manga) {
+  _openChap(row, chap) {
     const { navigator, index, data } = this.props;
+    const { host } = this.state;
     //set manga id
     navigator.push({
       title: 'ĐỌC TRUYỆN',
       index: index + 1,
       display: false,
       component: ReadManga,
-      data: { chap: manga, manga: data }
+      data: { chap, manga: data.manga, host }
     });
   }
 
-    async _controlPress(action) {
+  _savePress(chap) {
+    const { navigator, index, data } = this.props;
+    const { host } = this.state;
+
+    let url =  host + chap.url;
+
+    axios({method: 'GET', url, params: { }})
+    .then(async (response) => {
+      const { current } = this.state;
+      let read = CheerioUtil.getReadManga(response.data, host);
+
+      FileUtil.getMangaHTML(read.listPages, {title: chap.title, url: url}, data.manga);
+    })
+    .catch((error) => {
+      console.warn(error);
+    });
+  }
+
+  async _controlPress(action) {
     const { data } = this.props;
+    const { host } = this.state;
 
     switch(action) {
       case 'bookmark':
-        await StorageUtil.saveBookMark(data);
+        data.manga.host = host;
+        await StorageUtil.saveBookMark(data.manga);
       break;
       case 'bookmarks':
         if (next && next != current) {
@@ -128,15 +172,15 @@ export default class DetailManga extends Component{
       <View style={styles.container}>
         <PageHeader navigator={navigator} index={index} />
         <ScrollView>
-        <Text style={[styles.faceIntroduce, {fontWeight: 'bold'}]}>{data.title}</Text>
+        <Text style={[styles.faceIntroduce, {fontWeight: 'bold'}]}>{data.manga.title}</Text>
         <View style={styles.faceContainer}>
-          {data.image && (<Image resizeMode='stretch' source={{uri: data.image}} style={styles.faceImage}/>)}
+          {data.manga.image && (<Image resizeMode='stretch' source={{uri: data.manga.image}} style={styles.faceImage}/>)}
           {introduce != '' && (<Text style={styles.faceIntroduce}>{introduce}</Text>)}
         </View>
         </ScrollView>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.btnTextStyle} onPress={() => this._controlPress('read') }>
-            <Text style={[styles.btnText, {color: '#ffffff'}]}>{'ĐỌC TRUYỆN'}</Text>
+            <Text style={[styles.btnText, {color: '#ffffff'}]}>{'FULL CHAP'}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btnTextStyle} onPress={() => this._controlPress('continue') }>
             <Text style={[styles.btnText, {color: '#ffffff'}]}>{'ĐỌC TIẾP'}</Text>
@@ -144,24 +188,25 @@ export default class DetailManga extends Component{
           <TouchableOpacity style={styles.btnStyle} onPress={() => this._controlPress('bookmark') }>
             <Icon name='md-bookmark' color='#60B644' size={32}/>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btnStyle} onPress={() => this._controlPress('bookmarks') }>
-            <Icon name='md-bookmarks' color='#60B644' size={32}/>
-          </TouchableOpacity>
         </View>
         <ScrollView style={styles.recordList}>
+          <Text style={styles.recordListHeader}>{'CHAP MỚI'}</Text>
           <ListView
           style={styles.recordList}
           enableEmptySections = {true} 
           dataSource={source}
+          contentContainerStyle={(Util.size.width > 800) ? {flexDirection: 'row', flexWrap: 'wrap'} : {}}
+          pageSize={(Util.size.width > 800) ? 999999999 : 20}
           renderRow={(rowData) => 
           <TouchableOpacity underlayColor={'#bbb'} onPress={() => {
               this._openChap(this.rowID, rowData);
             }}>
             <View style={styles.recordItem}>
               <Text style={styles.recordItemTitle}>{rowData.title}</Text>
-              <View style={{alignItems: 'center'}}>
-                <Text style={styles.recordItemTime}>{rowData.date}</Text>
-              </View>
+              <Text style={styles.recordItemTime}>{rowData.date}</Text>
+              <TouchableOpacity style={styles.btnStyle} onPress={() => this._savePress(rowData) }>
+                <MCIcon name='content-save' color='#60B644' size={32}/>
+              </TouchableOpacity>
             </View>
           </TouchableOpacity>
           }/>
@@ -197,12 +242,20 @@ const styles = StyleSheet.create({
     height: 60,
     flexDirection: 'row'
   },
+  recordListHeader: {
+    width: Util.size.width,
+    paddingLeft: 30,
+    paddingTop: 5,
+    paddingBottom: 5,
+    color: '#ffffff',
+    fontWeight: 'bold'
+  },
   faceImage: {
     paddingRight: 30,
-    //left: Util.size.width - 140,
     paddingTop: 0,
     height: 180,
-    flex: 1,
+    width: (Util.size.width > 800) ? 180 : undefined,
+    flex: (Util.size.width > 800) ? 0 : 1,
   },
   faceIntroduce: {
     width: Util.size.width * 80 / 100,
@@ -214,10 +267,12 @@ const styles = StyleSheet.create({
   },
   recordList: {
     width: Util.size.width,
-    height: Util.size.height - 250 - 60,
+    height: Util.size.height - 250 - 90,
     backgroundColor: '#bbb',
   },
   recordItem: {
+    width: (Util.size.width > 800) ? Util.size.width / 2 : Util.size.width,
+    flex: 1,
     height: 80,
     backgroundColor: '#ffffff',
     borderBottomWidth: Util.pixel,borderBottomColor: '#ffffff',
@@ -233,6 +288,8 @@ const styles = StyleSheet.create({
     color: '#777'
   },
   recordItemTime:{
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: 'transparent',
     flex: 1,
     textAlign: 'right',

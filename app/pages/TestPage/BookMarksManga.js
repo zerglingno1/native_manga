@@ -53,13 +53,12 @@ export default class BookMarksManga extends Component{
 
   _openManga(row, manga) {
     const { navigator, index } = this.props;
-
     navigator.push({
       title: manga.title,
       index: index + 1,
       display: false,
       component: DetailManga,
-      data: manga
+      data: { manga, url: manga.host }
     });
   }
 

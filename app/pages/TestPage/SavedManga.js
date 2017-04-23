@@ -14,7 +14,9 @@ import PageHeader from '../../components/Common/PageHeader';
 import Util from '../../utils/utils';
 import CheerioUtil from '../../utils/CheerioUtil';
 import StorageUtil from '../../utils/StorageUtil';
+import FileUtil from '../../utils/FileUtil';
 import ReadSavedManga from './ReadSavedManga';
+import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
 
 export default class SavedManga extends Component{
@@ -65,6 +67,18 @@ export default class SavedManga extends Component{
     });
   }
 
+  async _deletePress(data) {
+    await FileUtil.removeManga(data);
+    let newList = await StorageUtil.removeMangaSaved(data);
+    if (newList) {
+      StorageUtil.getSavedMultiManga(newList, (list) => {
+        this.setState({
+          list
+        });
+      });
+    }
+  }
+
   render() {
       const { type, list, dataSource } = this.state;
       const { navigator, index } = this.props;
@@ -85,7 +99,10 @@ export default class SavedManga extends Component{
                 <View style={{alignItems: 'center'}}>
                     <Image resizeMode='stretch' source={(rowData.image) ? {uri: rowData.image} : require('../../assets/images/w2.png')} style={styles.recordItemImage}/>
                 </View>
-                <Text style={styles.recordItemTitle}>{rowData.title} {' ( ' +Object.keys(rowData.chaps).length + ' CHAP ĐÃ LƯU )'} </Text>
+                <Text style={styles.recordItemTitle}>{rowData.title} {' ( ' + Object.keys(rowData.chaps).length + ' CHAP ĐÃ LƯU )'} </Text>
+                <TouchableOpacity style={styles.btnStyle} onPress={async () => await this._deletePress(rowData) }>
+                  <MCIcon name='delete' color='#60B644' size={32}/>
+                </TouchableOpacity>
               </View>
             </TouchableOpacity>
           }/>)}
@@ -125,5 +142,10 @@ const styles = StyleSheet.create({
     width: 80,
     flex: 1,
   },
+  btnStyle: {
+    width: 30,
+    height: 30,
+    marginLeft: 10,
+  }
 });
 

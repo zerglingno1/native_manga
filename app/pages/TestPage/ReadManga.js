@@ -41,6 +41,9 @@ export default class ReadManga extends Component{
 
   componentWillMount() {
     const { data } = this.props;
+    this.setState({
+      host: data.host
+    });
     this.loadManga({url: data.chap.url, title: data.chap.title});
 
     BackAndroid.addEventListener('hardwareBackPress', () => {
@@ -59,7 +62,7 @@ export default class ReadManga extends Component{
     const { data } = this.props;
 
     await StorageUtil.saveHistory(data.manga.id, {title: chap.title, url: chap.url});
-    let url =  host + chap.url;
+    let url =  data.host + chap.url;
 
     if (!pages[chap.url]) {
       this.setState({
@@ -70,7 +73,7 @@ export default class ReadManga extends Component{
       axios({method: 'GET', url, params: { }})
       .then(async (response) => {
         const { current } = this.state;
-        let read = CheerioUtil.getReadManga(response.data);
+        let read = CheerioUtil.getReadManga(response.data, data.host);
 
         let position = -1;
         read.listChaps.forEach((item, index) => {
@@ -170,7 +173,7 @@ export default class ReadManga extends Component{
 
 
   render() {
-      const { dataSource, pages, host, current, options, title, chaps } = this.state;
+      const { dataSource, pages, current, options, title, chaps } = this.state;
       const { navigator, index } = this.props;
 
       let list = pages[current];

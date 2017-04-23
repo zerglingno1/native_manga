@@ -62,10 +62,10 @@ class native_manga extends Component {
     return (
       <Navigator
         initialRoute={{ 
-          title: 'EC ORANGE',
+          title: 'TRUYỆN TRANH',
           index: 0,
-          display: false,
-          component: PosMainView,
+          display: true,
+          component: MainView,
         }}
         configureScene={this.configureScene}
         renderScene={(route, navigator) => {

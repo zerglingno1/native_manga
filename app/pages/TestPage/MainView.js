@@ -6,7 +6,7 @@ import {
   View,
   ScrollView,
   Image,
-  TextInput } from 'react-native';
+  TextInput, Picker } from 'react-native';
 import Util from '../../utils/utils';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ListManga from './ListManga';
@@ -17,6 +17,7 @@ import CategoryManga from './CategoryManga';
 import SavedManga from './SavedManga';
 import Reminder from '../Reminder';
 import WebViewPage from '../WebViewPage';
+import AnimeList from './AnimeList';
 
 export default class MainView extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ export default class MainView extends Component {
         size: 100,
         color: '#ff856c',
         hideNav: true,
-      }, {
+      },/* {
         key: 2,
         title: 'TRUYỆN HOT',
         component: HotManga,
@@ -55,7 +56,7 @@ export default class MainView extends Component {
         color: '#ff856c',
         hideNav: true,
         data: {type: '/truyen-moi-dang'}
-      }, {
+      }, */{
         key: 4,
         title: 'THỂ LOẠI',
         component: CategoryManga,
@@ -89,7 +90,8 @@ export default class MainView extends Component {
         color: '#ff856c',
         hideNav: true,
       }],
-      search: ''
+      search: '',
+      host: 'http://hamtruyen.vn'
     }
   }
 
@@ -108,13 +110,13 @@ export default class MainView extends Component {
 
   _searchManga() {
     const { navigator, index } = this.props;
-    const { search } = this.state;
+    const { search, host } = this.state;
     navigator.push({
       title: `TÌM KIẾM ${search}`,
       index: index + 1,
       display: false,
       component: SearchManga,
-      data: search
+      data: { search, host }
     })
   }
 
@@ -125,8 +127,14 @@ export default class MainView extends Component {
       });
   };
 
+  _onProviderChange = (value) => {
+    this.setState({
+      host: value,
+    });
+  };
+
   render() {
-    const { menus, search } = this.state;
+    const { menus, search, host } = this.state;
     const { title } = this.props;
     let boxs = menus.map((item, index) => {
       return(
@@ -141,6 +149,14 @@ export default class MainView extends Component {
     return(
       <ScrollView style={styles.mainView} title={title}>
         <View style={styles.faceContainer}>
+          <Picker
+            style={styles.picker}
+            onValueChange={this._onProviderChange}
+            selectedValue={host}
+            mode="dialog">
+              <Picker.Item label={`Blog Truyện`} value={`http://m.blogtruyen.com`} />
+              <Picker.Item label={`Ham Truyện`} value={`http://hamtruyen.vn`} />
+          </Picker>
           <TextInput placeholder='TÌM KIẾM' onSubmitEditing={() => this._searchManga()} onChange={this._handleSearchChange} style={styles.inputText}/>
           <TouchableOpacity style={styles.btnStyle} onPress={() => this._searchManga() }>
             <Icon name='magnify' color='#60B644' size={32}/>
@@ -159,8 +175,8 @@ const styles = StyleSheet.create({
     marginTop: 65
   },
   touchBox: {
-    width: (Util.size.width > 700) ? (Util.size.width - 10 - 4 * 15) / 4 : (Util.size.width - 10 - 3 * 10) / 3.01333,
-    height: (Util.size.width > 700) ? (Util.size.width - 10 - 4 * 15) / 4 : (Util.size.width - 10 - 3*10) / 3.01333,
+    width: (Util.size.width > 800) ? (Util.size.width - 10 - 5 * 15) / 5 : (Util.size.width - 10 - 3 * 10) / 3.02,
+    height: (Util.size.width > 800) ? (Util.size.width - 10 - 5 * 15) / 5 : (Util.size.width - 10 - 3 * 10) / 3.02,
     backgroundColor: '#f3f3f3',
     marginTop: 5,
     marginLeft: 5,
@@ -176,13 +192,13 @@ const styles = StyleSheet.create({
   boxContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: (Util.size.width > 700) ? (Util.size.width - 10 - 4 * 15) / 4 : (Util.size.width - 10 - 3*10) / 3.01333,
-    height: (Util.size.width > 700) ? (Util.size.width - 10 - 4 * 15) / 4 : (Util.size.width - 10 - 3*10) / 3.01333,
+    width: (Util.size.width > 800) ? (Util.size.width - 10 - 5 * 15) / 5 : (Util.size.width - 10 - 3 * 10) / 3.02,
+    height: (Util.size.width > 800) ? (Util.size.width - 10 - 5 * 15) / 5 : (Util.size.width - 10 - 3 * 10) / 3.02,
   },
   boxText: {
     position: 'absolute',
     bottom: 15,
-    width: (Util.size.width > 700) ? (Util.size.width - 10 - 4 * 15) / 4 : (Util.size.width - 10 - 3*10) / 3.01333,
+    width: (Util.size.width > 800) ? (Util.size.width - 10 - 5 * 15) / 5 : (Util.size.width - 10 - 3 * 10) / 3.02,
     textAlign: 'center',
     left: 0,
     backgroundColor: 'transparent'
@@ -227,8 +243,13 @@ const styles = StyleSheet.create({
   },
   inputText: {
     marginLeft: 10,
+    flex: 1,
     height: 40,
     width: Util.size.width - 120 - 40,
     color: '#363636',
+  },
+  picker: {
+    width: 150,
+    height: 40
   },
 });

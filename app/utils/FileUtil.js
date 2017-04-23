@@ -1,14 +1,21 @@
 import axios from 'axios';
 import StorageUtil from './StorageUtil';
+import { NativeModules } from 'react-native';
 
 export default {
   getMangaHTML: async (pages, chap, manga) => {
 
     let lis = '';
-    pages.map((item) => {
-        let img = item.image;
-        lis += `<li><img src="${img}"/></li>`;
-    });
+    let leng = pages.length;
+    for(let i = 0; i < leng; i++) {
+        let item = pages[i];
+        try {
+            let img = await NativeModules.ImageBaseModule.imageToBase64(item.image);
+            lis += `<li><img src="${img}"/></li>`;
+        } catch (e) {
+            lis += `<li><img src="${item.image}"/></li>`;
+        }
+    }
     let title = manga.title;
     let HTML = `
 <!DOCTYPE html>
@@ -37,30 +44,6 @@ export default {
             margin: 0;
         }
 	</style>
-    <script>
-        /*function toDataUrl(url, callback) {
-            var xhr = new XMLHttpRequest();
-            xhr.onload = function() {
-                var reader = new FileReader();
-                reader.onloadend = function() {
-                callback(reader.result);
-                }
-                reader.readAsDataURL(xhr.response);
-            };
-            xhr.open('GET', url);
-            xhr.responseType = 'blob';
-            xhr.send();
-        }
-
-        var images = document.getElementsByTagName('img'); 
-        var srcList = [];
-        for(var i = 0; i < images.length; i++) {
-            srcList.push(images[i].src);
-            toDataUrl(images[i].src, function(base64Img) {
-                images[i].src = base64Img);
-            });
-        }*/
-    </script>
 </head>
 <body>
 	<ul>
@@ -68,6 +51,25 @@ export default {
     </ul>
 </body>
 </html>`;
-    await StorageUtil.saveManga(HTML, chap, manga);
+    let name = await NativeModules.ImageBaseModule.saveToLocalFile(manga.id + "_" + chap.title, HTML);
+    await StorageUtil.saveMangaList(chap, manga, name);
   },
+  removeManga: async (data) => {
+    for (let [key, item] of Object.entries(data.chaps)) {
+        try {
+            await NativeModules.ImageBaseModule.removeFile(item.pages);
+        } catch (e) {
+            return false;
+        }
+    }
+    return true;
+  },
+  removeChap: async (link) => {
+    try {
+        await NativeModules.ImageBaseModule.removeFile(link);
+    } catch (e) {
+        return false;
+    }
+    return true;
+  }
 }

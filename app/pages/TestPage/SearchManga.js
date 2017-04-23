@@ -19,38 +19,52 @@ import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
 
 export default class SearchManga extends Component{
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+  
     this.state = {
       dataSource,
       search: '',
       list: [],
-      url: 'http://m.blogtruyen.com/timkiem?keyword=',
+      url: '',
     };
   }
 
   componentWillMount() {
     const { data } = this.props;
+
     BackAndroid.addEventListener('hardwareBackPress', () => {
       const { navigator, index } = this.props;
       if (index > 0) {navigator.pop()};
       BackAndroid.removeEventListener('hardwareBackPress');
       return true;
     });
-    
-    this._startLoad(data);   
+    this.setState({
+      url: data.host
+    });
+    this._startLoad(data.search, data.host);   
   }
 
   componentDidMount() {
   }
 
-  _startLoad(search) {
-    const { url } = this.state;
+  _startLoad(search, host) {
+    
+    let path = '';
 
-    axios({method: 'GET', url: url + search, params: { }})
+    switch(host) {
+      case 'http://m.blogtruyen.com':
+        path = 'http://m.blogtruyen.com/timkiem?keyword=' + search;
+      break;
+      case 'http://hamtruyen.vn':
+        path = 'http://hamtruyen.vn/@SEARCH@/search.html';
+        path = path.replace('@SEARCH@', search);
+      break;
+    }
+    axios({method: 'GET', url: path, params: { }})
       .then(async (response) => {
-        let list = CheerioUtil.getSearchManga(response.data);
+        let list = CheerioUtil.getSearchManga(response.data, host);
 
         this.setState({
           list
@@ -63,21 +77,33 @@ export default class SearchManga extends Component{
 
   _openManga(row, manga) {
     const { navigator, index } = this.props;
+    const { url } = this.state;
     navigator.push({
       title: '',
       index: index + 1,
       display: false,
       component: DetailManga,
-      data: manga
+      data: {manga, url }
     });
   }
 
+  _handleSearchChange = (event) => {
+    let search = event.nativeEvent.text;
+    this.setState({
+        search
+      });
+  };
+
   _searchManga() {
-    this.refs.searchBox.value;
+    const { url, search } = this.state;
+    this.setState({
+      search
+    });
+    this._startLoad(search, url);
   }
 
   render() {
-    const { list, dataSource } = this.state;
+    const { list, dataSource, search } = this.state;
     const { navigator, index } = this.props;
 
     let source = dataSource.cloneWithRows(list);
@@ -86,7 +112,7 @@ export default class SearchManga extends Component{
       <ScrollView style={styles.container}>
         <PageHeader navigator={navigator} index={index} />
         <View style={styles.faceContainer}>
-          <TextInput ref='searchBox' defaultValue={''} style={styles.inputText}/>
+          <TextInput defaultValue={search} value={search}  ref='searchBox' defaultValue={''} style={styles.inputText} onChange={this._handleSearchChange}/>
           <TouchableOpacity style={styles.btnStyle} onPress={() => this._searchManga() }>
             <MCIcon name='magnify' color='#60B644' size={32}/>
           </TouchableOpacity>

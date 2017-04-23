@@ -25,16 +25,16 @@ export default class ListManga extends Component{
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource,
-      type: '/danhsach/tatca',
+      type: '/danhsach/index.html?sort=1',
       types: [],
       total: 0,
       list: [],
-      url: 'http://m.blogtruyen.com',
+      url: 'http://hamtruyen.vn',
       page: '1',
       paging: [],
     };
     
-    this._startLoad(false);
+    this._startLoad(false, false);
   }
 
   componentWillMount() {
@@ -50,17 +50,43 @@ export default class ListManga extends Component{
   componentDidMount() {
   }
 
-  _startLoad(num, mType = false) {
+  _startLoad(murl, num, mType = false) {
     const { type, list, url, page } = this.state;
-    let path = url;
-    path += (mType) ? mType : type;
-    path += (num) ?  '?p=' + num :  '?p=' + page;
+    let path = (murl) ? murl : url;
+    let myPath = path;
+    let numPage = (num) ? num : page;
+    let myType = (mType) ? mType : type;
+    
+    switch (myPath) {
+      case 'http://m.blogtruyen.com':
+        path += myType;
+        path += '?p=' + numPage;
+      break;
+      case 'http://hamtruyen.vn':
+        myType = myType.replace('/index.html', `/P${numPage}/index.html` );
+        path += myType;
+      break;
+    }
     axios({method: 'GET', url: path, params: { }})
       .then(async (response) => {
         const { type } = this.state;
 
-        let mangas = CheerioUtil.getListManga(response.data);
-        mangas.total = mangas.total.replace(type + '?p=', '');
+        
+        let mangas = CheerioUtil.getListManga(response.data, myPath);
+        
+        switch (myPath) {
+          case 'http://m.blogtruyen.com':
+            mangas.total = mangas.total.replace(type + '?p=', '');
+          break;
+          case 'http://hamtruyen.vn':
+            let numPage = (num) ? num : page;
+            if (numPage == 1 || numPage == mangas.total - 1) {
+              mangas.total = mangas.total - 1;
+            } else {
+              mangas.total = mangas.total - 2;
+            }
+          break;
+        }
 
         this.setState({
           list: mangas.listManga,
@@ -76,13 +102,14 @@ export default class ListManga extends Component{
 
   _openManga(row, manga) {
     const { navigator, index } = this.props;
+    const { url } = this.state;
 
     navigator.push({
       title: manga.title,
       index: index + 1,
       display: false,
       component: DetailManga,
-      data: manga
+      data: {manga, url}
     });
   }
 
@@ -96,7 +123,7 @@ export default class ListManga extends Component{
           this.setState({
             page: (Number(page) - 1)
           });
-          this._startLoad((Number(page) - 1));
+          this._startLoad(false, (Number(page) - 1));
           this.refs.listManga.scrollTo({x: 0,y: 0,animated: false});
         }
       break;
@@ -105,7 +132,7 @@ export default class ListManga extends Component{
           this.setState({
             page: (Number(page) + 1)
           });
-          this._startLoad((Number(page) + 1));
+          this._startLoad(false, (Number(page) + 1));
           this.refs.listManga.scrollTo({x: 0,y: 0,animated: false});
         }
       break;
@@ -114,9 +141,19 @@ export default class ListManga extends Component{
 
   _onValueChange = (value) => {
     this.setState({
-      page: value
+      page: value,
     });
-    this._startLoad(value);
+    this._startLoad(false, value);
+    this.refs.listManga.scrollTo({x: 0,y: 0,animated: false});
+  };
+
+  _onProviderChange = (value) => {
+    let type = (value == 'http://m.blogtruyen.com') ? '/danhsach/tatca' : '/danhsach/index.html?sort=1';
+    this.setState({
+      url: value,
+      type
+    });
+    this._startLoad(value, false, type);
     this.refs.listManga.scrollTo({x: 0,y: 0,animated: false});
   };
 
@@ -134,12 +171,12 @@ export default class ListManga extends Component{
       type: item.url,
       page: '1'
     });
-    this._startLoad('1', item.url);
+    this._startLoad(false, '1', item.url);
     this.refs.listManga.scrollTo({x: 0,y: 0,animated: false});
   };
 
   render() {
-    const { type, list, test, dataSource, types, page, total, paging } = this.state;
+    const { type, list, dataSource, types, page, total, paging, url } = this.state;
     const { navigator, index } = this.props;
 
     let source = dataSource.cloneWithRows(list);
@@ -180,7 +217,9 @@ export default class ListManga extends Component{
         style={styles.recordList}
         ref='listManga'
         scrollsToTop={true}
+        contentContainerStyle={(Util.size.width > 800) ? {flexDirection: 'row', flexWrap: 'wrap'} : {}}
         renderHeader = {() => <View style={{height: 10, backgroundColor: '#f5f5f5'}} />}
+        pageSize={(Util.size.width > 800) ? 999999999 : 20}
         enableEmptySections = {true} 
         dataSource={source}
         renderRow={(rowData) => 
@@ -210,6 +249,14 @@ export default class ListManga extends Component{
           <TouchableOpacity style={styles.btnStyle} onPress={() => this._controlPress('next') }>
             <Icon name='md-arrow-round-forward' color='#60B644' size={32}/>
           </TouchableOpacity>
+          <Picker
+            style={styles.picker}
+            onValueChange={this._onProviderChange}
+            selectedValue={url}
+            mode="dialog">
+              <Picker.Item label={`Blog Truyện`} value={`http://m.blogtruyen.com`} />
+              <Picker.Item label={`Ham Truyện`} value={`http://hamtruyen.vn`} />
+          </Picker>
         </View>
       </ScrollView>
     );
@@ -226,13 +273,18 @@ const styles = StyleSheet.create({
   recordList: {
     width: Util.size.width,
     height: Util.size.height - 40 - 50 - 80,
+    backgroundColor: '#f3f3f3'
   },
   recordItem: {
+    width: (Util.size.width > 800) ? Util.size.width / 2 - 10 * 2 : Util.size.width - 20,
+    flex: 1,
     height: 80,
     borderBottomWidth: Util.pixel,borderBottomColor: '#bbb',
     paddingTop: 5, paddingLeft: 10, paddingRight: 10, paddingBottom: 5,
+    marginLeft: 10, marginRight: 10, marginTop: 10,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#ffffff'
   },
   recordItemTitle:{
     backgroundColor: 'transparent',
@@ -269,7 +321,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   picker: {
-    width: 200,
+    flex: 1,
     height: 40
   },
   currentPage: {

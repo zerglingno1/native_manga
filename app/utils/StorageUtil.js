@@ -77,6 +77,28 @@ export default {
       await AsyncStorage.setItem(table + manga.id, JSON.stringify(mangaData));
     }
   },
+  saveMangaList: async (chap, manga, name) => {
+    const table = '@MANGA';
+    const tableList = '@MANGALIST';
+    let mangaData = await AsyncStorage.getItem(table + manga.id);
+    let list = await AsyncStorage.getItem(tableList);
+    if (!mangaData) {
+      manga.chaps= {};
+      manga.chaps[chap.url] = {url: chap.url, title: chap.title, pages: name + '.html'};
+      await AsyncStorage.setItem(table + manga.id, JSON.stringify(manga));
+      if (list) {
+        list = JSON.parse(list);
+      } else {
+        list = [];
+      }
+      list.push(table + manga.id);
+      await AsyncStorage.setItem(tableList, JSON.stringify(list));
+    } else {
+      mangaData = JSON.parse(mangaData);
+      mangaData.chaps[chap.url] = {url: chap.url, title: chap.title, pages: name + '.html'};
+      await AsyncStorage.setItem(table + manga.id, JSON.stringify(mangaData));
+    }
+  },
   getSavedMangaList: async () => {
     const table = '@MANGALIST';
     let historyData = await AsyncStorage.getItem(table);
@@ -99,4 +121,43 @@ export default {
       });
     }
   },
+  removeMangaSaved: async (manga) => {
+    try {
+      const table = '@MANGA';
+      const tableList = '@MANGALIST';
+      await AsyncStorage.removeItem(table + manga.id);
+      let list = await AsyncStorage.getItem(tableList);
+      if (list) {
+        
+        list = JSON.parse(list);
+        let temp = [];
+        list.map((item) => {
+          if(item != table + manga.id) {
+            temp.push(item);
+          }
+        });
+        await AsyncStorage.setItem(tableList, JSON.stringify(temp));
+        return temp;
+      }
+    } catch (e) {
+      return false;
+    }
+  },
+  removeChapSaved: async (manga, current) => {
+    try {
+      const table = '@MANGA';
+
+      let mangaData = await AsyncStorage.getItem(table + manga.id);
+      if (mangaData) {
+        mangaData = JSON.parse(mangaData);
+        let temp = mangaData.chaps;
+        delete temp[current];
+        mangaData.chaps = temp;
+        await AsyncStorage.setItem(table + manga.id, JSON.stringify(mangaData));
+        return mangaData;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
 }
